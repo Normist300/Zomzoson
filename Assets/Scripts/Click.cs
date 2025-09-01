@@ -46,6 +46,10 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
     public void SetHighlightClicked(bool on)
     {
+        foreach (var m in _materials)
+        {
+            if (highlightColorClicked == m.color) { return; }
+        }
         if (on)
         {
             foreach (var m in _materials)
