@@ -27,6 +27,8 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
     public void SetHighlight(bool on)
     {
+        if (highlightColorClicked * intensityClicked == _materials[0].GetColor("_EmissionColor")) { return; } // Если цвет == как выбранный, то выходим
+
         if (on)
         {
             foreach (var m in _materials)
@@ -46,12 +48,9 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
     public void SetHighlightClicked(bool on)
     {
-        foreach (var m in _materials)
-        {
-            if (highlightColorClicked == m.color) { return; }
-        }
         if (on)
         {
+            if (highlightColorClicked * intensityClicked == _materials[0].GetColor("_EmissionColor")) { return; } // Выходим, если цвет уже выделен
             foreach (var m in _materials)
             {
                 m.EnableKeyword("_EMISSION");
