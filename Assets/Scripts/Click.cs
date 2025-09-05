@@ -2,13 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using EasyButtons;
+using UnityEngine.Events;
+using System;
 
 public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private int UIPositon = -1;
     [SerializeField] private Color highlightColor = Color.green;
     [SerializeField] private float intensity = 2.0f;
     [SerializeField] private Color highlightColorClicked = Color.green;
     [SerializeField] private float intensityClicked = 2.0f;
+    [SerializeField] public static event Action<int> OnTest;
 
     private Renderer[] _renderers;
     private readonly List<Material> _materials = new();
@@ -71,6 +75,7 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
         Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
         var r = GetComponent<Renderer>();
         SetHighlightClicked(true);
+        OnTest?.Invoke(UIPositon);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

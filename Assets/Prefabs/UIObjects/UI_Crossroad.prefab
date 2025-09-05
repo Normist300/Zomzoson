@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8929042495058188170}
   m_Layer: 0
   m_Name: UI_Crossroad
-  m_TagString: Untagged
+  m_TagString: UITile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13c305274703c644927887752126d90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  UIPositon: -1
   highlightColor: {r: 0, g: 1, b: 0.9764706, a: 1}
   intensity: 0.15
   highlightColorClicked: {r: 0, g: 1, b: 0.9764706, a: 1}

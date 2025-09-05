@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 1270351521}
   m_Layer: 0
   m_Name: EventSystem
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1064,6 +1064,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Crossroad
       objectReference: {fileID: 0}
+    - target: {fileID: 2386810461235776063, guid: 510caf78fe32a904eba1160f7b9080d9, type: 3}
+      propertyPath: m_TagString
+      value: UITile
+      objectReference: {fileID: 0}
     - target: {fileID: 3701685517321255098, guid: 510caf78fe32a904eba1160f7b9080d9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1072,11 +1076,26 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 1669735396}
+    - target: {fileID: 8929042495058188170, guid: 510caf78fe32a904eba1160f7b9080d9, type: 3}
+      propertyPath: test.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2141028026}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 510caf78fe32a904eba1160f7b9080d9, type: 3}
+--- !u!114 &2141028026 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8929042495058188170, guid: 510caf78fe32a904eba1160f7b9080d9, type: 3}
+  m_PrefabInstance: {fileID: 2141028025}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13c305274703c644927887752126d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &9065024241550648542
 PrefabInstance:
   m_ObjectHideFlags: 0
