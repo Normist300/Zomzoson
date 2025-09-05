@@ -12,7 +12,8 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     [SerializeField] private float intensity = 2.0f;
     [SerializeField] private Color highlightColorClicked = Color.green;
     [SerializeField] private float intensityClicked = 2.0f;
-    [SerializeField] public static event Action<int> OnTest;
+    public bool isClicked = false;
+    public event Action<int> OnTest;
 
     private Renderer[] _renderers;
     private readonly List<Material> _materials = new();
@@ -31,7 +32,7 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
     public void SetHighlight(bool on)
     {
-        if (highlightColorClicked * intensityClicked == _materials[0].GetColor("_EmissionColor")) { return; } // Если цвет == как выбранный, то выходим
+        if (isClicked) { return; } // Если уже кликнут, то выделять не надо
 
         if (on)
         {
@@ -54,7 +55,8 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     {
         if (on)
         {
-            if (highlightColorClicked * intensityClicked == _materials[0].GetColor("_EmissionColor")) { return; } // Выходим, если цвет уже выделен
+            if (isClicked && // Если выделен + включена эмиссия, то выходим
+                _materials[0].IsKeywordEnabled("_EMISSION")) { return; }
             foreach (var m in _materials)
             {
                 m.EnableKeyword("_EMISSION");
@@ -73,9 +75,10 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
-        var r = GetComponent<Renderer>();
-        SetHighlightClicked(true);
+        //var r = GetComponent<Renderer>();
+        //SetHighlightClicked(true);
         OnTest?.Invoke(UIPositon);
+        isClicked = true;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
