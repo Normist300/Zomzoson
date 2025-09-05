@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 756568793}
+    - target: {fileID: 3567278050338248676, guid: a330f8c91cfe5bf43a0c5b6ed6d6b1a3, type: 3}
+      propertyPath: UIPositon
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3665481735495440100, guid: a330f8c91cfe5bf43a0c5b6ed6d6b1a3, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -783,6 +787,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 756568793}
     - target: {fileID: 3567278050338248676, guid: a330f8c91cfe5bf43a0c5b6ed6d6b1a3, type: 3}
+      propertyPath: UIPositon
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567278050338248676, guid: a330f8c91cfe5bf43a0c5b6ed6d6b1a3, type: 3}
       propertyPath: intensity
       value: 0.15
       objectReference: {fileID: 0}
@@ -1076,6 +1084,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 1669735396}
+    - target: {fileID: 8929042495058188170, guid: 510caf78fe32a904eba1160f7b9080d9, type: 3}
+      propertyPath: UIPositon
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8929042495058188170, guid: 510caf78fe32a904eba1160f7b9080d9, type: 3}
       propertyPath: test.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
