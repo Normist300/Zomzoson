@@ -14,6 +14,7 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     [SerializeField] private float intensityClicked = 2.0f;
     public bool isClicked = false;
     public event Action<int> OnSelectTile;
+    public UnityEvent building_grid;
 
     private Renderer[] _renderers;
     private readonly List<Material> _materials = new();
@@ -75,9 +76,8 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
-        //var r = GetComponent<Renderer>();
-        //SetHighlightClicked(true);
         OnSelectTile?.Invoke(UIPositon);
+        building_grid?.Invoke();
         isClicked = true;
     }
 
