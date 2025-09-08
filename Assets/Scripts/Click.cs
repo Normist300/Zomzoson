@@ -13,7 +13,7 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     [SerializeField] private Color highlightColorClicked = Color.green;
     [SerializeField] private float intensityClicked = 2.0f;
     public bool isClicked = false;
-    public event Action<int> OnTest;
+    public event Action<int> OnSelectTile;
 
     private Renderer[] _renderers;
     private readonly List<Material> _materials = new();
@@ -77,7 +77,7 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
         Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
         //var r = GetComponent<Renderer>();
         //SetHighlightClicked(true);
-        OnTest?.Invoke(UIPositon);
+        OnSelectTile?.Invoke(UIPositon);
         isClicked = true;
     }
 

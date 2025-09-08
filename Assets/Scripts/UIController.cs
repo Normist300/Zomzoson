@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
 
         foreach (var tile in tiles)
         {
-            tile.OnTest += SelectTile;
+            tile.OnSelectTile += SelectTile;
             subscribedClicks.Add(tile);
         }
     }
@@ -27,7 +27,7 @@ public class UIController : MonoBehaviour
     {
         // Отключение ивентов со всех экземпляров
         foreach (var tile in subscribedClicks)
-            tile.OnTest -= SelectTile;
+            tile.OnSelectTile -= SelectTile;
 
         subscribedClicks.Clear();
     }
