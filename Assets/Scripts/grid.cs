@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class grid : MonoBehaviour
+public class Grid : MonoBehaviour
 {
     // Размер сетки
     public int width = 10;
@@ -44,6 +44,15 @@ public class grid : MonoBehaviour
 
                 // Создание ячейки
                 GameObject cell = Instantiate(cellSpace, position, Quaternion.identity, transform);
+                Cell classCell = cell.GetComponent<Cell>();
+                if (classCell != null)
+                {
+                    classCell.SetValues(x, z);
+                }
+                else
+                {
+                    Debug.Log("Не найден класс Cell");
+                }
                 // Сохраняем ссылку на созданный объект в словарь
                 gridCells[x][z] = cell;
             }

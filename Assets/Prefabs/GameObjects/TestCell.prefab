@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 91629157476245233}
   m_Layer: 0
   m_Name: TestCell
-  m_TagString: Untagged
+  m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

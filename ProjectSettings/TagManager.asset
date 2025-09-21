@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - UITile
+  - Cell
   layers:
   - Default
   - TransparentFX

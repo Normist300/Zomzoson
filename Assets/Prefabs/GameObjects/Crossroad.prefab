@@ -234,9 +234,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 412650127986757741}
+  - component: {fileID: 4725113492795984353}
   m_Layer: 0
   m_Name: Crossroad
-  m_TagString: Untagged
+  m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,6 +258,26 @@ Transform:
   - {fileID: 4796788053530297750}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4725113492795984353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590673541786021084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02d28e259795f0419af5af291766fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cell
+  highlightColor: {r: 0, g: 1, b: 0, a: 1}
+  intensity: 2
+  highlightColorClicked: {r: 0, g: 1, b: 0, a: 1}
+  intensityClicked: 2
+  isClicked: 0
+  eventReplaceCell:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7396244256788920566
 GameObject:
   m_ObjectHideFlags: 0
