@@ -1,14 +1,23 @@
+using NUnit.Framework.Constraints;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GridController : MonoBehaviour
 {
-    private List<Cell> subscribedClicks = new();
     Cell[] cells;
+    private List<Cell> subscribedClicks = new();
 
     [SerializeField] private Grid grid;
+    [SerializeField] private UIController UIcontroller;
+
+    private void Start()
+    {
+        grid.eventGridReady += onGridReady;
+    }
+
     private void OnEnable()
     {
         // Подключение ивентов со всех экземпляров
@@ -27,13 +36,23 @@ public class GridController : MonoBehaviour
     {
         // Отключение ивентов со всех экземпляров
         foreach (var tile in subscribedClicks)
-            tile.OnSelectTile -= SelectTile;
+            tile.eventReplaceCell -= onReplaceCell;
 
         subscribedClicks.Clear();
     }
 
+    void onGridReady()
+    {
+        OnEnable();
+    }
+
     void onReplaceCell(int x, int y)
     {
+        if (UIcontroller.currentGameObject != null)
+        {
+            grid.ReplaceCell(x, y, UIcontroller.currentGameObject);
+        }
+        else Debug.LogWarning("UIcontroller.currentGameObject == null");
 
     }
 }

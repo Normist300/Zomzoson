@@ -12,8 +12,10 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     [SerializeField] private float intensity = 2.0f;
     [SerializeField] private Color highlightColorClicked = Color.green;
     [SerializeField] private float intensityClicked = 2.0f;
+    [SerializeField] public GameObject aliasGameObject;
     public bool isClicked = false;
-    public event Action<int> OnSelectTile;
+    public event Action<int, GameObject> eventSelectTile;
+    public event Action eventDisableTile;
     public UnityEvent building_grid;
 
     private Renderer[] _renderers;
@@ -75,10 +77,18 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
-        OnSelectTile?.Invoke(UIPositon);
-        building_grid?.Invoke();
-        isClicked = true;
+        if (!isClicked)
+        {
+            Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
+            eventSelectTile?.Invoke(UIPositon, aliasGameObject);
+            //building_grid?.Invoke();
+            isClicked = true;
+        }
+        else
+        {
+            Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
+            eventDisableTile?.Invoke();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

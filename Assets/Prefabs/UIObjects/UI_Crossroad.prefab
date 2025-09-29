@@ -72,6 +72,7 @@ MonoBehaviour:
   intensity: 0.15
   highlightColorClicked: {r: 0, g: 1, b: 0.9764706, a: 1}
   intensityClicked: 0.25
+  aliasGameObject: {fileID: 6590673541786021084, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
   isClicked: 0
   building_grid:
     m_PersistentCalls:

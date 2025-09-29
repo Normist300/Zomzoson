@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
 {
     private List<Click> subscribedClicks = new();
     int currentUIPosition = -1;
+    public GameObject currentGameObject;
     Click[] tiles;
 
     private void OnEnable()
@@ -18,7 +19,8 @@ public class UIController : MonoBehaviour
 
         foreach (var tile in tiles)
         {
-            tile.OnSelectTile += SelectTile;
+            tile.eventSelectTile += onSelectTile;
+            tile.eventDisableTile += onDiasableTile;
             subscribedClicks.Add(tile);
         }
     }
@@ -27,8 +29,10 @@ public class UIController : MonoBehaviour
     {
         // Отключение ивентов со всех экземпляров
         foreach (var tile in subscribedClicks)
-            tile.OnSelectTile -= SelectTile;
-
+        {
+            tile.eventSelectTile -= onSelectTile;
+            tile.eventDisableTile -= onDiasableTile;
+        }
         subscribedClicks.Clear();
     }
 
@@ -41,8 +45,9 @@ public class UIController : MonoBehaviour
     {
     }
 
-    void SelectTile(int UIPosition)
+    void onSelectTile(int UIPosition, GameObject newGameObject)
     {
+        currentGameObject = newGameObject;
         if (currentUIPosition == -1)
         {
             currentUIPosition = UIPosition;
@@ -55,5 +60,13 @@ public class UIController : MonoBehaviour
             currentUIPosition = UIPosition;
             tiles[currentUIPosition].SetHighlightClicked(true);
         }
+    }
+
+    void onDiasableTile()
+    {
+        tiles[currentUIPosition].SetHighlightClicked(false);
+        tiles[currentUIPosition].isClicked = false;
+        currentUIPosition = -1;
+        currentGameObject = null;
     }
 }

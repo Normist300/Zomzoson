@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Grid : MonoBehaviour
 {
+    public event Action eventGridReady;
+
     // Размер сетки
     public int width = 10;
     public int height = 10;
@@ -25,6 +28,7 @@ public class Grid : MonoBehaviour
     void Start()
     {
         GenerateGrid();
+        eventGridReady.Invoke();
         ReplaceCell(3, 3, cellFirst);
     }
 

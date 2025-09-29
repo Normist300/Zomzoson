@@ -292,7 +292,7 @@ Transform:
   - {fileID: 878847622}
   - {fileID: 1152829163}
   - {fileID: 305865178}
-  m_Father: {fileID: 1270351520}
+  m_Father: {fileID: 1406736673}
   m_LocalEulerAnglesHint: {x: 59.628, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -510,6 +510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d58373d73a83da458e16da2837043c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  grid: {fileID: 1580767881}
+  UIcontroller: {fileID: 1270351521}
 --- !u!4 &475446652
 Transform:
   m_ObjectHideFlags: 0
@@ -836,7 +838,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 330585546}
+  - {fileID: 1406736673}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1270351521
@@ -851,6 +853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a99ba00c516cc46b2c1b0f7fa87f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  currentGameObject: {fileID: 0}
 --- !u!1001 &1402383052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -940,6 +943,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22d4d78eb911ad8499bb3048b918d67e, type: 3}
+--- !u!1 &1406736672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1406736673}
+  - component: {fileID: 1406736674}
+  m_Layer: 0
+  m_Name: God
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1406736673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406736672}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 330585546}
+  m_Father: {fileID: 1270351520}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1406736674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406736672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e3561974a0e2c469a17dbff4a5da9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WASDGod
+  moveSpeed: 1
+  scrollSpeed: 500
+  minY: 20
+  maxY: 100
 --- !u!1 &1580767880
 GameObject:
   m_ObjectHideFlags: 0

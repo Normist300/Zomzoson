@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Road Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7091691839198129508, guid: f790cea0505fbf546bcf452809fde44e, type: 3}
+      propertyPath: aliasGameObject
+      value: 
+      objectReference: {fileID: 7433177364286664093, guid: fb8c5dd89c461df4c92e1a34b8b43210, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5416243977246352253, guid: f790cea0505fbf546bcf452809fde44e, type: 3}

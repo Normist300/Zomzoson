@@ -7,16 +7,14 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private int xPos;
-    private int yPos;
+    public int xPos;
+    public int yPos;
     [SerializeField] private Color highlightColor = Color.green;
     [SerializeField] private float intensity = 2.0f;
     [SerializeField] private Color highlightColorClicked = Color.green;
     [SerializeField] private float intensityClicked = 2.0f;
     public bool isClicked = false;
-    //public event Action<int> OnSelectTile;
-    //public UnityEvent building_grid;
-    public UnityEvent<int, int> eventReplaceCell;
+    public event Action<int, int> eventReplaceCell;
 
     private Renderer[] _renderers;
     private readonly List<Material> _materials = new();
@@ -84,9 +82,9 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
-        // Получаем доступ к объекту, на котором находится Script1
+        Debug.Log($"{xPos}, {yPos}");
         eventReplaceCell.Invoke(xPos, yPos);
-        isClicked = true;
+        //isClicked = true;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
