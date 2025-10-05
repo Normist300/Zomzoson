@@ -988,10 +988,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e3561974a0e2c469a17dbff4a5da9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WASDGod
-  moveSpeed: 1
-  scrollSpeed: 500
+  moveSpeed: 40
+  scrollSpeed: 10000
   minY: 20
   maxY: 100
+  minYVelocity: 0.5
+  maxYVelocity: 2
 --- !u!1 &1580767880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +1029,7 @@ MonoBehaviour:
   indentX: 10
   indentZ: 10
   cellSize: 20
-  cellSpace: {fileID: 427662390597233459, guid: 2b1bd14d3f29ba045bdd6a2320f725f6, type: 3}
+  cellSpace: {fileID: 6242477276939435404, guid: 1789f863aee0ef84c847c7c936fbf605, type: 3}
   cellFirst: {fileID: 7433177364286664093, guid: fb8c5dd89c461df4c92e1a34b8b43210, type: 3}
 --- !u!4 &1580767882
 Transform:
