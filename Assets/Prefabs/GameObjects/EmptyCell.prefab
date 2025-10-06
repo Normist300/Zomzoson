@@ -45,14 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02d28e259795f0419af5af291766fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cell
+  xPos: 0
+  yPos: 0
   highlightColor: {r: 0, g: 1, b: 0, a: 1}
   intensity: 2
   highlightColorClicked: {r: 0, g: 1, b: 0, a: 1}
   intensityClicked: 2
   isClicked: 0
-  eventReplaceCell:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8068708529692352390
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +79,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 19, y: 0.35, z: 19}
+  m_LocalScale: {x: 20, y: 0.35, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8255120994992338058}
