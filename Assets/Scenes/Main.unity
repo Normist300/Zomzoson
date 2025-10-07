@@ -512,6 +512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   grid: {fileID: 1580767881}
   UIcontroller: {fileID: 1270351521}
+  materialPreviewMode: {fileID: 2100000, guid: 665041ba32105df458595e0c46434cf3, type: 2}
 --- !u!4 &475446652
 Transform:
   m_ObjectHideFlags: 0
