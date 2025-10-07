@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cell
   xPos: 0
   yPos: 0
+  isEmptyCell: 1
   highlightColor: {r: 0, g: 1, b: 0, a: 1}
   intensity: 2
   highlightColorClicked: {r: 0, g: 1, b: 0, a: 1}

@@ -8,10 +8,11 @@ using UnityEngine.UI;
 public class GridController : MonoBehaviour
 {
     Cell[] cells;
-    private List<Cell> subscribedClicks = new();
+    private List<Cell> subscribedCells = new();
 
     [SerializeField] private Grid grid;
     [SerializeField] private UIController UIcontroller;
+    public Material materialPreviewMode;
 
     private void Start()
     {
@@ -28,17 +29,20 @@ public class GridController : MonoBehaviour
         foreach (var cell in cells)
         {
             cell.eventReplaceCell += onReplaceCell;
-            subscribedClicks.Add(cell);
+            cell.eventPreview += onPreview;
+            subscribedCells.Add(cell);
         }
     }
 
     private void OnDisable()
     {
         // Отключение ивентов со всех экземпляров
-        foreach (var tile in subscribedClicks)
-            tile.eventReplaceCell -= onReplaceCell;
-
-        subscribedClicks.Clear();
+        foreach (var cell in subscribedCells)
+        {
+            cell.eventReplaceCell -= onReplaceCell;
+            cell.eventPreview -= onPreview;
+        }
+        subscribedCells.Clear();
     }
 
     void onGridReady()
@@ -54,5 +58,20 @@ public class GridController : MonoBehaviour
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
 
+    }
+
+    void onPreview(int x, int y)
+    {
+        if (UIcontroller.currentGameObject != null)
+        {
+            GameObject pasteObject = UIcontroller.currentGameObject;
+            Renderer[] rendsPasteObject = pasteObject.GetComponentsInChildren<Renderer>();
+            foreach (Renderer rend in rendsPasteObject)
+            {
+                rend.material = materialPreviewMode;
+            }
+            grid.ReplaceCell(x, y, pasteObject);
+        }
+        else Debug.LogWarning("UIcontroller.currentGameObject == null");
     }
 }
