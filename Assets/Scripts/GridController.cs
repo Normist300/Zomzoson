@@ -30,6 +30,7 @@ public class GridController : MonoBehaviour
         {
             cell.eventReplaceCell += onReplaceCell;
             cell.eventPreview += onPreview;
+            cell.eventDisPreview += onDisPreview;
             subscribedCells.Add(cell);
         }
     }
@@ -41,6 +42,7 @@ public class GridController : MonoBehaviour
         {
             cell.eventReplaceCell -= onReplaceCell;
             cell.eventPreview -= onPreview;
+            cell.eventDisPreview -= onDisPreview;
         }
         subscribedCells.Clear();
     }
@@ -64,13 +66,22 @@ public class GridController : MonoBehaviour
     {
         if (UIcontroller.currentGameObject != null)
         {
-            GameObject pasteObject = UIcontroller.currentGameObject;
+            GameObject pasteObject = Instantiate(UIcontroller.currentGameObject);
             Renderer[] rendsPasteObject = pasteObject.GetComponentsInChildren<Renderer>();
             foreach (Renderer rend in rendsPasteObject)
             {
                 rend.material = materialPreviewMode;
             }
             grid.ReplaceCell(x, y, pasteObject);
+        }
+        else Debug.LogWarning("UIcontroller.currentGameObject == null");
+    }
+
+    void onDisPreview(int x, int y)
+    {
+         if (UIcontroller.currentGameObject != null)
+        {
+            grid.ReplaceCell(x, y, grid.cellSpace);
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
     }
