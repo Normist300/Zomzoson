@@ -19,6 +19,7 @@ public class Grid : MonoBehaviour
     // Префаб для клеток (например, куб)
     public GameObject cellSpace;
     public GameObject cellFirst;
+    public UIController uiController;
 
     // Вложенный словарь для хранения объектов сетки
     private Dictionary<int, Dictionary<int, GameObject>> gridCells = new Dictionary<int, Dictionary<int, GameObject>>();
