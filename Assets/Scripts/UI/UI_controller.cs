@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
     private List<Click> subscribedClicks = new();
     int currentUIPosition = -1;
     public GameObject currentGameObject;
+    public bool isSelected;
     Click[] tiles;
 
     private void OnEnable()
@@ -38,7 +39,7 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        
+        isSelected = false;
     }
 
     void Update()
@@ -60,6 +61,7 @@ public class UIController : MonoBehaviour
             currentUIPosition = UIPosition;
             tiles[currentUIPosition].SetHighlightClicked(true);
         }
+        isSelected = true;
     }
 
     void onDiasableTile()
@@ -68,5 +70,6 @@ public class UIController : MonoBehaviour
         tiles[currentUIPosition].isClicked = false;
         currentUIPosition = -1;
         currentGameObject = null;
+        isSelected = false;
     }
 }

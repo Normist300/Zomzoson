@@ -18,6 +18,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public event Action<int, int> eventReplaceCell;
     public event Action<int, int> eventPreview;
     public event Action<int, int> eventDisPreview;
+    public UIController uiController;
 
     private Renderer[] _renderers;
     private readonly List<Material> _materials = new();
@@ -38,6 +39,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             // Важно: у одного Renderer может быть несколько материалов
             _materials.AddRange(r.materials); // инстансы материалов на каждом объекте
         }
+        uiController = FindFirstObjectByType<UIController>();
     }
 
     public void SetHighlight(bool on)
@@ -94,15 +96,21 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        var r = GetComponent<Renderer>();
-        Debug.Log($"Enter {gameObject.name} with {eventData.button}");
-        eventPreview.Invoke(xPos, yPos);
+        //var r = GetComponent<Renderer>();
+        //Debug.Log($"Enter {gameObject.name} with {eventData.button}");
+        if (uiController.isSelected)
+        {
+            eventPreview.Invoke(xPos, yPos);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        var r = GetComponent<Renderer>();
-        Debug.Log($"Exit {gameObject.name} with {eventData.button}");
-        eventDisPreview.Invoke(xPos, yPos);
+        //var r = GetComponent<Renderer>();
+        //Debug.Log($"Exit {gameObject.name} with {eventData.button}");
+        if (uiController.isSelected)
+        {
+            eventDisPreview.Invoke(xPos, yPos);
+        }
     }
 }

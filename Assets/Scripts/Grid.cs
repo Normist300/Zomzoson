@@ -81,16 +81,26 @@ public class Grid : MonoBehaviour
 
     public void AddCell (int x, int y, GameObject newCell)
     {
-        if (GetCell(x, y) != null || GetCell(x, y) != cellSpace)
+        if (GetCell(x, y) != null && GetCell(x, y) != cellSpace)
         {
             Vector3 objectPosition = transform.position;
             Vector3 position = new Vector3(x * cellSize + objectPosition.x + indentX, objectPosition.y,
                                            y * cellSize + objectPosition.z + indentZ);
-            GameObject cell = Instantiate(newCell, position, Quaternion.identity, transform);
+            if (newCell.scene.IsValid())
+            {
+                newCell.transform.position = position;
+                gridCells[x][y] = newCell;
+            }
+            else
+            {
+                GameObject cell = Instantiate(newCell, position, Quaternion.identity, transform);
+                gridCells[x][y] = cell;
+            }
+            Debug.Log($"Создана ячейка в ({x}, {y})");
         }
         else
         {
-            Debug.Log("Место для ячейки занято");
+            Debug.Log($"Место для ячейки ({x}, {y}) занято");
         }
     }
 
