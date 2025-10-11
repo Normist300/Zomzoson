@@ -95,6 +95,7 @@ public class Grid : MonoBehaviour
                 newCell.eventReplaceCell += gridController.onReplaceCell;
                 newCell.eventPreview += gridController.onPreview;
                 newCell.eventDisPreview += gridController.onDisPreview;
+                gridController.subscribedCells.Add(newCell);
             }
             else
             {
@@ -104,6 +105,7 @@ public class Grid : MonoBehaviour
                 cell.eventReplaceCell += gridController.onReplaceCell;
                 cell.eventPreview += gridController.onPreview;
                 cell.eventDisPreview += gridController.onDisPreview;
+                gridController.subscribedCells.Add(cell);
             }
             Debug.Log($"Создана ячейка в ({x}, {y})");
         }
@@ -131,6 +133,7 @@ public class Grid : MonoBehaviour
     public void DestroyCell(int x, int y)
     {
         Destroy(GetCell(x, y));
+        gridCells[x].Remove(y);
     }
 
     public void ReplaceCell(int x, int y, GameObject newCell)

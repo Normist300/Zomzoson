@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GridController : MonoBehaviour
 {
     Cell[] cells;
-    private List<Cell> subscribedCells = new();
+    public List<Cell> subscribedCells = new();
 
     [SerializeField] private Grid grid;
     [SerializeField] private UIController UIcontroller;
