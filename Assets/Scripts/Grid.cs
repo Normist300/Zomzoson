@@ -82,7 +82,7 @@ public class Grid : MonoBehaviour
 
     public void AddCell (int x, int y, GameObject newGoCell)
     {
-        if (GetCell(x, y) != null && GetCell(x, y) != cellSpace)
+        if (GetCell(x, y) == null)
         {
             Vector3 objectPosition = transform.position;
             Vector3 position = new Vector3(x * cellSize + objectPosition.x + indentX, objectPosition.y,
@@ -91,23 +91,27 @@ public class Grid : MonoBehaviour
             {
                 newGoCell.transform.position = position;
                 gridCells[x][y] = newGoCell;
-                Cell newCell = newGoCell.gameObject.AddComponent<Cell>();
-                newCell.eventReplaceCell += gridController.onReplaceCell;
-                newCell.eventPreview += gridController.onPreview;
-                newCell.eventDisPreview += gridController.onDisPreview;
-                gridController.subscribedCells.Add(newCell);
+                Cell newClassCell = newGoCell.gameObject.GetComponent<Cell>();
+                newClassCell.eventReplaceCell += gridController.onReplaceCell;
+                newClassCell.eventPreview += gridController.onPreview;
+                newClassCell.eventDisPreview += gridController.onDisPreview;
+                gridController.subscribedCells.Add(newClassCell);
+                newClassCell.SetValues(x, y);
+                Debug.Log($"Создана ячейка в ({x}, {y}), {newClassCell.isPreview}");
             }
             else
             {
                 GameObject goCell = Instantiate(newGoCell, position, Quaternion.identity, transform);
                 gridCells[x][y] = goCell;
-                Cell cell = goCell.GetComponent<Cell>();
-                cell.eventReplaceCell += gridController.onReplaceCell;
-                cell.eventPreview += gridController.onPreview;
-                cell.eventDisPreview += gridController.onDisPreview;
-                gridController.subscribedCells.Add(cell);
+                Cell classCell = goCell.GetComponent<Cell>();
+                classCell.eventReplaceCell += gridController.onReplaceCell;
+                classCell.eventPreview += gridController.onPreview;
+                classCell.eventDisPreview += gridController.onDisPreview;
+                gridController.subscribedCells.Add(classCell);
+                classCell.SetValues(x, y);
+                Debug.Log($"Создана ячейка в ({x}, {y}), {classCell.isPreview}");
             }
-            Debug.Log($"Создана ячейка в ({x}, {y})");
+            
         }
         else
         {

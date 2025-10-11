@@ -10,11 +10,12 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public int xPos;
     public int yPos;
     public bool isEmptyCell = false;
+    public bool isClicked = false;
+    public bool isPreview = false;
     [SerializeField] private Color highlightColor = Color.green;
     [SerializeField] private float intensity = 2.0f;
     [SerializeField] private Color highlightColorClicked = Color.green;
     [SerializeField] private float intensityClicked = 2.0f;
-    public bool isClicked = false;
     public event Action<int, int> eventReplaceCell;
     public event Action<int, int> eventPreview;
     public event Action<int, int> eventDisPreview;
@@ -97,20 +98,26 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public void OnPointerEnter(PointerEventData eventData)
     {
         //var r = GetComponent<Renderer>();
-        //Debug.Log($"Enter {gameObject.name} with {eventData.button}");
+        //Debug.Log($"Enter {xPos} {yPos} with {eventData.button}");
         if (uiController.isSelected)
         {
-            eventPreview.Invoke(xPos, yPos);
+            if (!isPreview)
+            {
+                eventPreview.Invoke(xPos, yPos);
+            }
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         //var r = GetComponent<Renderer>();
-        //Debug.Log($"Exit {gameObject.name} with {eventData.button}");
+        Debug.Log($"Exit {xPos} {yPos} with {eventData.button}");
         if (uiController.isSelected)
         {
+            if (!isPreview)
+            {
             eventDisPreview.Invoke(xPos, yPos);
+            }
         }
     }
 }

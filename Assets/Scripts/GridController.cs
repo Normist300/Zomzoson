@@ -14,6 +14,8 @@ public class GridController : MonoBehaviour
     [SerializeField] private UIController UIcontroller;
     public Material materialPreviewMode;
 
+    public Vector2Int currentPreview = new Vector2Int(-1, -1);
+
     private void Start()
     {
         grid.eventGridReady += onGridReady;
@@ -72,7 +74,19 @@ public class GridController : MonoBehaviour
             {
                 rend.material = materialPreviewMode;
             }
+            Cell classCellPreviewObject = pasteObject.GetComponent<Cell>();
+            classCellPreviewObject.isPreview = true; 
             grid.ReplaceCell(x, y, pasteObject);
+
+            if (currentPreview != new Vector2Int(-1, -1))
+            {
+                onDisPreview(currentPreview.x, currentPreview.y);
+                currentPreview = new Vector2Int(x, y);
+            }
+            else
+            {
+                currentPreview = new Vector2Int(x, y);
+            }
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
     }
