@@ -855,6 +855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   currentGameObject: {fileID: 0}
+  isSelected: 0
 --- !u!1001 &1402383052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1032,6 +1033,7 @@ MonoBehaviour:
   cellSize: 20
   cellSpace: {fileID: 6242477276939435404, guid: 1789f863aee0ef84c847c7c936fbf605, type: 3}
   cellFirst: {fileID: 7433177364286664093, guid: fb8c5dd89c461df4c92e1a34b8b43210, type: 3}
+  uiController: {fileID: 1270351521}
 --- !u!4 &1580767882
 Transform:
   m_ObjectHideFlags: 0

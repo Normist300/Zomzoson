@@ -52,7 +52,7 @@ public class GridController : MonoBehaviour
         OnEnable();
     }
 
-    void onReplaceCell(int x, int y)
+    public void onReplaceCell(int x, int y)
     {
         if (UIcontroller.currentGameObject != null)
         {
@@ -62,7 +62,7 @@ public class GridController : MonoBehaviour
 
     }
 
-    void onPreview(int x, int y)
+    public void onPreview(int x, int y)
     {
         if (UIcontroller.currentGameObject != null)
         {
@@ -77,7 +77,7 @@ public class GridController : MonoBehaviour
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
     }
 
-    void onDisPreview(int x, int y)
+    public void onDisPreview(int x, int y)
     {
          if (UIcontroller.currentGameObject != null)
         {
