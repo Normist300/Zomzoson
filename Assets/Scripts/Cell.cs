@@ -9,6 +9,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 {
     public int xPos;
     public int yPos;
+    public Vector2Int pos;
     public bool isEmptyCell = false;
     public bool isClicked = false;
     public bool isPreview = false;
@@ -17,10 +18,10 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [SerializeField] private float intensity = 2.0f;
     [SerializeField] private Color highlightColorClicked = Color.green;
     [SerializeField] private float intensityClicked = 2.0f;
-    public event Action<int, int> eventReplaceCell;
-    public event Action<int, int> eventPreview;
-    public event Action<int, int> eventDisPreview;
-    public event Action<int, int> eventPointerEnter;
+    public event Action<Vector2Int> eventReplaceCell;
+    public event Action<Vector2Int> eventPreview;
+    public event Action<Vector2Int> eventDisPreview;
+    public event Action<Vector2Int> eventEnterMount;
     public UIController uiController;
     public GridController gridController;
 
@@ -29,8 +30,8 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void SetValues(int x, int y)
     {
-        xPos = x;
-        yPos = y;
+        pos.x = x;
+        pos.y = y;
     }
 
 
@@ -94,35 +95,35 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (isEmptyCell)
         {
             Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
-            Debug.Log($"{xPos}, {yPos}");
-            eventReplaceCell.Invoke(xPos, yPos);
+            Debug.Log($"{pos.x}, {pos.y}");
+            eventReplaceCell.Invoke(pos);
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         //var r = GetComponent<Renderer>();
-        //Debug.Log($"Enter {xPos} {yPos} with {eventData.button}");
+        //Debug.Log($"Enter {pos.x} {pos.y} with {eventData.button}");
         if (uiController.isSelected)
         {
             if (!isPreview && !isMounted)
             {
-                eventPreview.Invoke(xPos, yPos);
+                eventPreview.Invoke(pos);
+            }
+            if (isMounted)
+            {
+                eventEnterMount.Invoke(pos);
             }
         }
-        eventPointerEnter.Invoke(xPos, yPos);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         //var r = GetComponent<Renderer>();
-        Debug.Log($"Exit {xPos} {yPos} with {eventData.button}");
+        Debug.Log($"Exit {pos.x} {pos.y} with {eventData.button}");
         if (uiController.isSelected)
         {
-            if (!isPreview)
-            {
-            eventDisPreview.Invoke(xPos, yPos);
-            }
+            
         }
     }
 
@@ -131,6 +132,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         eventReplaceCell += gridController.onReplaceCell;
         eventPreview += gridController.onPreview;
         eventDisPreview += gridController.onDisPreview;
+        eventEnterMount += gridController.onEnterMount;
         gridController.subscribedCells.Add(this);
     }
 
@@ -139,6 +141,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         eventReplaceCell -= gridController.onReplaceCell;
         eventPreview -= gridController.onPreview;
         eventDisPreview -= gridController.onDisPreview;
+        eventEnterMount -= gridController.onEnterMount;
         gridController.subscribedCells.Remove(this);
     }
 }

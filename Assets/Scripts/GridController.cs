@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 public class GridController : MonoBehaviour, IController
 {
-    Cell[] cells;
+    ISubscribable<GridController>[] iSubCells;
     public List<Cell> subscribedCells = new();
 
     [SerializeField] private Grid grid;
     [SerializeField] private UIController UIcontroller;
     public Material materialPreviewMode;
 
-    public Vector2Int currentPreview = new Vector2Int(-1, -1);
+    public Vector2Int currentMouseEnter = new Vector2Int(-1, -1);
 
     private void Start()
     {
@@ -24,11 +24,11 @@ public class GridController : MonoBehaviour, IController
     private void OnEnable()
     {
         // Подключение ивентов со всех экземпляров
-        cells = GetComponentsInChildren<Cell>()
+        iSubCells = GetComponentsInChildren<Cell>()
                                .Where(t => t.CompareTag("Cell"))
                                .ToArray();
 
-        foreach (var cell in cells)
+        foreach (var cell in iSubCells)
         {
             cell.Subscribe(this);
         }
@@ -37,7 +37,7 @@ public class GridController : MonoBehaviour, IController
     private void OnDisable()
     {
         // Отключение ивентов со всех экземпляров
-        foreach (var cell in subscribedCells)
+        foreach (var cell in subscribedCells.ToList()) // ToList() чтобы не было ошибки
         {
             cell.Unsubscribe(this);
         }
@@ -49,20 +49,20 @@ public class GridController : MonoBehaviour, IController
         OnEnable();
     }
 
-    public void onReplaceCell(int x, int y)
+    public void onReplaceCell(Vector2Int pos)
     {
         if (UIcontroller.currentGameObject != null)
         {
             GameObject goForFunc = Instantiate(UIcontroller.currentGameObject);
             Cell goCell = goForFunc.GetComponent<Cell>();
             goCell.isMounted = true;
-            grid.ReplaceCell(x, y, goForFunc);
+            grid.ReplaceCell(pos.x, pos.y, goForFunc);
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
 
     }
 
-    public void onPreview(int x, int y)
+    public void onPreview(Vector2Int pos)
     {
         if (UIcontroller.currentGameObject != null)
         {
@@ -74,27 +74,42 @@ public class GridController : MonoBehaviour, IController
             }
             Cell classCellPreviewObject = pasteObject.GetComponent<Cell>();
             classCellPreviewObject.isPreview = true; 
-            grid.ReplaceCell(x, y, pasteObject);
+            grid.ReplaceCell(pos.x, pos.y, pasteObject);
 
-            if (currentPreview != new Vector2Int(-1, -1))
+            if (currentMouseEnter != new Vector2Int(-1, -1))
             {
-                onDisPreview(currentPreview.x, currentPreview.y);
-                currentPreview = new Vector2Int(x, y);
+                onDisPreview(currentMouseEnter);
+                currentMouseEnter = new Vector2Int(pos.x, pos.y);
             }
             else
             {
-                currentPreview = new Vector2Int(x, y);
+                currentMouseEnter = new Vector2Int(pos.x, pos.y);
             }
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
     }
 
-    public void onDisPreview(int x, int y)
+    public void onDisPreview(Vector2Int pos)
     {
          if (UIcontroller.currentGameObject != null)
         {
-            grid.ReplaceCell(x, y, grid.cellSpace);
+            grid.ReplaceCell(pos.x, pos.y, grid.cellSpace);
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
+    }
+
+    public void onEnterMount(Vector2Int pos)
+    {
+        //if (currentMouseEnter != new Vector2Int(-1, -1))
+        //{
+        //    GameObject pastCell = grid.GetCell(x, y)
+        //    if 
+        //    onDisPreview(currentMouseEnter.x, currentMouseEnter.y);
+        //    currentMouseEnter = new Vector2Int(x, y);
+        //}
+        //else
+        //{
+        //    currentMouseEnter = new Vector2Int(x, y);
+        //}
     }
 }
