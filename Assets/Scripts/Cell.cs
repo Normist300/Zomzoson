@@ -28,10 +28,9 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private Renderer[] _renderers;
     private readonly List<Material> _materials = new();
 
-    public void SetValues(int x, int y)
+    public void SetValues(Vector2Int newPos)
     {
-        pos.x = x;
-        pos.y = y;
+        pos = newPos;
     }
 
 

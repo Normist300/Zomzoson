@@ -31,7 +31,7 @@ public class Grid : MonoBehaviour
         GenerateGrid();
         eventGridReady.Invoke();
         GameObject goCellFirst = InstanForMount(cellFirst);
-        ReplaceCell(3, 3, goCellFirst);
+        ReplaceCell(new Vector2Int(3, 3), goCellFirst);
     }
 
     public GameObject InstanForMount(GameObject go)
@@ -61,7 +61,7 @@ public class Grid : MonoBehaviour
                 Cell classCell = cell.GetComponent<Cell>();
                 if (classCell != null)
                 {
-                    classCell.SetValues(x, z);
+                    classCell.SetValues(new Vector2Int(x, z));
                 }
                 else
                 {
@@ -77,11 +77,11 @@ public class Grid : MonoBehaviour
     }
 
     // Пример метода для получения объекта по координатам
-    public GameObject GetCell(int x, int y)
+    public GameObject GetCell(Vector2Int pos)
     {
-        if (gridCells.ContainsKey(x) && gridCells[x].ContainsKey(y))
+        if (gridCells.ContainsKey(pos.x) && gridCells[pos.x].ContainsKey(pos.y))
         {
-            return gridCells[x][y];
+            return gridCells[pos.x][pos.y];
         }
         else
         {
@@ -89,36 +89,37 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void AddCell (int x, int y, GameObject newGoCell)
+    public void AddCell (Vector2Int pos, GameObject newGoCell)
     {
-        if (GetCell(x, y) == null)
+        if (GetCell(pos) == null)
         {
             Vector3 objectPosition = transform.position;
-            Vector3 position = new Vector3(x * cellSize + objectPosition.x + indentX, objectPosition.y,
-                                           y * cellSize + objectPosition.z + indentZ);
+            Vector3 position = new Vector3(pos.x * cellSize + objectPosition.x + indentX, objectPosition.y,
+                                           pos.y * cellSize + objectPosition.z + indentZ);
             if (newGoCell.scene.IsValid())
             {
                 newGoCell.transform.position = position;
-                gridCells[x][y] = newGoCell;
+                gridCells[pos.x][pos.y] = newGoCell;
                 Cell newGoClassCell = newGoCell.gameObject.GetComponent<Cell>();
                 newGoClassCell.Subscribe(gridController);
-                newGoClassCell.SetValues(x, y);
-                Debug.Log($"Создана ячейка в ({x}, {y}), {newGoClassCell.isPreview}");
+                newGoClassCell.SetValues(pos);
+                newGoCell.transform.SetParent(transform);
+                Debug.Log($"Создана ячейка в ({pos}), {newGoClassCell.isPreview}");
             }
             else
             {
                 GameObject goCell = Instantiate(newGoCell, position, Quaternion.identity, transform);
-                gridCells[x][y] = goCell;
+                gridCells[pos.x][pos.y] = goCell;
                 Cell classCell = goCell.GetComponent<Cell>();
                 classCell.Subscribe(gridController);
-                classCell.SetValues(x, y);
-                Debug.Log($"Создана ячейка в ({x}, {y}), {classCell.isPreview}");
+                classCell.SetValues(pos);
+                Debug.Log($"Создана ячейка в ({pos}), {classCell.isPreview}");
             }
             
         }
         else
         {
-            Debug.Log($"Место для ячейки ({x}, {y}) занято");
+            Debug.Log($"Место для ячейки ({pos}) занято");
         }
     }
 
@@ -137,18 +138,18 @@ public class Grid : MonoBehaviour
         Debug.Log("All cells destroyed.");
     }
 
-    public void DestroyCell(int x, int y)
+    public void DestroyCell(Vector2Int pos)
     {
-        Destroy(GetCell(x, y));
-        gridCells[x].Remove(y);
+        Destroy(GetCell(pos));
+        gridCells[pos.x].Remove(pos.y);
     }
 
-    public void ReplaceCell(int x, int y, GameObject newCell)
+    public void ReplaceCell(Vector2Int pos, GameObject newCell)
     {
-        if (gridCells.ContainsKey(x) && gridCells[x].ContainsKey(y))
+        if (gridCells.ContainsKey(pos.x) && gridCells[pos.x].ContainsKey(pos.y))
         {
-            DestroyCell(x, y);
-            AddCell(x, y, newCell);
+            DestroyCell(pos);
+            AddCell(pos, newCell);
         }
         else
         {

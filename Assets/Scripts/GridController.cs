@@ -56,7 +56,7 @@ public class GridController : MonoBehaviour, IController
             GameObject goForFunc = Instantiate(UIcontroller.currentGameObject);
             Cell goCell = goForFunc.GetComponent<Cell>();
             goCell.isMounted = true;
-            grid.ReplaceCell(pos.x, pos.y, goForFunc);
+            grid.ReplaceCell(pos, goForFunc);
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
 
@@ -74,16 +74,24 @@ public class GridController : MonoBehaviour, IController
             }
             Cell classCellPreviewObject = pasteObject.GetComponent<Cell>();
             classCellPreviewObject.isPreview = true; 
-            grid.ReplaceCell(pos.x, pos.y, pasteObject);
+            grid.ReplaceCell(pos, pasteObject);
 
             if (currentMouseEnter != new Vector2Int(-1, -1))
             {
-                onDisPreview(currentMouseEnter);
-                currentMouseEnter = new Vector2Int(pos.x, pos.y);
+                Cell pastClassCell = grid.GetCell(currentMouseEnter).GetComponent<Cell>();
+                if (!pastClassCell.isMounted)
+                {
+                    onDisPreview(currentMouseEnter);
+                    currentMouseEnter = pos;
+                }
+                else
+                {
+                    currentMouseEnter = pos;
+                }
             }
             else
             {
-                currentMouseEnter = new Vector2Int(pos.x, pos.y);
+                currentMouseEnter = pos;
             }
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
@@ -93,23 +101,25 @@ public class GridController : MonoBehaviour, IController
     {
          if (UIcontroller.currentGameObject != null)
         {
-            grid.ReplaceCell(pos.x, pos.y, grid.cellSpace);
+            grid.ReplaceCell(pos, grid.cellSpace);
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
     }
 
     public void onEnterMount(Vector2Int pos)
     {
-        //if (currentMouseEnter != new Vector2Int(-1, -1))
-        //{
-        //    GameObject pastCell = grid.GetCell(x, y)
-        //    if 
-        //    onDisPreview(currentMouseEnter.x, currentMouseEnter.y);
-        //    currentMouseEnter = new Vector2Int(x, y);
-        //}
-        //else
-        //{
-        //    currentMouseEnter = new Vector2Int(x, y);
-        //}
+        if (currentMouseEnter != new Vector2Int(-1, -1))
+        {
+            Cell pastClassCell = grid.GetCell(currentMouseEnter).GetComponent<Cell>();
+            if (pastClassCell.isPreview)
+            {
+                onDisPreview(currentMouseEnter);
+                currentMouseEnter = pos;
+            }
+        }
+        else
+        {
+            currentMouseEnter = pos;
+        }
     }
 }
