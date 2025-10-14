@@ -30,7 +30,16 @@ public class Grid : MonoBehaviour
     {
         GenerateGrid();
         eventGridReady.Invoke();
-        ReplaceCell(3, 3, cellFirst);
+        GameObject goCellFirst = InstanForMount(cellFirst);
+        ReplaceCell(3, 3, goCellFirst);
+    }
+
+    public GameObject InstanForMount(GameObject go)
+    {
+        GameObject instanGo = Instantiate(go);
+        Cell cellInstanGo = instanGo.GetComponent<Cell>();
+        cellInstanGo.isMounted = true;
+        return instanGo;
     }
 
     // Генерация сетки

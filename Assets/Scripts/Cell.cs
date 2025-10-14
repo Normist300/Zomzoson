@@ -5,13 +5,14 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using static UnityEngine.Rendering.DebugUI;
 
-public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISubscribable<GridController>
 {
     public int xPos;
     public int yPos;
     public bool isEmptyCell = false;
     public bool isClicked = false;
     public bool isPreview = false;
+    public bool isMounted = false;
     [SerializeField] private Color highlightColor = Color.green;
     [SerializeField] private float intensity = 2.0f;
     [SerializeField] private Color highlightColorClicked = Color.green;
@@ -19,7 +20,9 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public event Action<int, int> eventReplaceCell;
     public event Action<int, int> eventPreview;
     public event Action<int, int> eventDisPreview;
+    public event Action<int, int> eventPointerEnter;
     public UIController uiController;
+    public GridController gridController;
 
     private Renderer[] _renderers;
     private readonly List<Material> _materials = new();
@@ -41,6 +44,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             _materials.AddRange(r.materials); // инстансы материалов на каждом объекте
         }
         uiController = FindFirstObjectByType<UIController>();
+        gridController = FindFirstObjectByType<GridController>();
     }
 
     public void SetHighlight(bool on)
@@ -101,11 +105,12 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         //Debug.Log($"Enter {xPos} {yPos} with {eventData.button}");
         if (uiController.isSelected)
         {
-            if (!isPreview)
+            if (!isPreview && !isMounted)
             {
                 eventPreview.Invoke(xPos, yPos);
             }
         }
+        eventPointerEnter.Invoke(xPos, yPos);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -119,5 +124,20 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             eventDisPreview.Invoke(xPos, yPos);
             }
         }
+    }
+
+    public void Subscribe(GridController gridController)
+    {
+        eventReplaceCell += gridController.onReplaceCell;
+        eventPreview += gridController.onPreview;
+        eventDisPreview += gridController.onDisPreview;
+        gridController.subscribedCells.Add(this);
+    }
+
+    public void Unsubscribe(GridController gridController)
+    {
+        eventReplaceCell -= gridController.onReplaceCell;
+        eventPreview -= gridController.onPreview;
+        eventDisPreview -= gridController.onDisPreview;
     }
 }

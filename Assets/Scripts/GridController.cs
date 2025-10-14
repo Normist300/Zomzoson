@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GridController : MonoBehaviour
+public class GridController : MonoBehaviour, IController
 {
     Cell[] cells;
     public List<Cell> subscribedCells = new();
@@ -58,7 +58,10 @@ public class GridController : MonoBehaviour
     {
         if (UIcontroller.currentGameObject != null)
         {
-            grid.ReplaceCell(x, y, UIcontroller.currentGameObject);
+            GameObject goForFunc = Instantiate(UIcontroller.currentGameObject);
+            Cell goCell = goForFunc.GetComponent<Cell>();
+            goCell.isMounted = true;
+            grid.ReplaceCell(x, y, goForFunc);
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
 
