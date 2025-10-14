@@ -30,10 +30,7 @@ public class GridController : MonoBehaviour, IController
 
         foreach (var cell in cells)
         {
-            cell.eventReplaceCell += onReplaceCell;
-            cell.eventPreview += onPreview;
-            cell.eventDisPreview += onDisPreview;
-            subscribedCells.Add(cell);
+            cell.Subscribe(this);
         }
     }
 
@@ -42,9 +39,7 @@ public class GridController : MonoBehaviour, IController
         // Отключение ивентов со всех экземпляров
         foreach (var cell in subscribedCells)
         {
-            cell.eventReplaceCell -= onReplaceCell;
-            cell.eventPreview -= onPreview;
-            cell.eventDisPreview -= onDisPreview;
+            cell.Unsubscribe(this);
         }
         subscribedCells.Clear();
     }

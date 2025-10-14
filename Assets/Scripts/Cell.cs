@@ -139,5 +139,6 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         eventReplaceCell -= gridController.onReplaceCell;
         eventPreview -= gridController.onPreview;
         eventDisPreview -= gridController.onDisPreview;
+        gridController.subscribedCells.Remove(this);
     }
 }

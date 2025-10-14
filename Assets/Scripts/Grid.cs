@@ -100,23 +100,17 @@ public class Grid : MonoBehaviour
             {
                 newGoCell.transform.position = position;
                 gridCells[x][y] = newGoCell;
-                Cell newClassCell = newGoCell.gameObject.GetComponent<Cell>();
-                newClassCell.eventReplaceCell += gridController.onReplaceCell;
-                newClassCell.eventPreview += gridController.onPreview;
-                newClassCell.eventDisPreview += gridController.onDisPreview;
-                gridController.subscribedCells.Add(newClassCell);
-                newClassCell.SetValues(x, y);
-                Debug.Log($"Создана ячейка в ({x}, {y}), {newClassCell.isPreview}");
+                Cell newGoClassCell = newGoCell.gameObject.GetComponent<Cell>();
+                newGoClassCell.Subscribe(gridController);
+                newGoClassCell.SetValues(x, y);
+                Debug.Log($"Создана ячейка в ({x}, {y}), {newGoClassCell.isPreview}");
             }
             else
             {
                 GameObject goCell = Instantiate(newGoCell, position, Quaternion.identity, transform);
                 gridCells[x][y] = goCell;
                 Cell classCell = goCell.GetComponent<Cell>();
-                classCell.eventReplaceCell += gridController.onReplaceCell;
-                classCell.eventPreview += gridController.onPreview;
-                classCell.eventDisPreview += gridController.onDisPreview;
-                gridController.subscribedCells.Add(classCell);
+                classCell.Subscribe(gridController);
                 classCell.SetValues(x, y);
                 Debug.Log($"Создана ячейка в ({x}, {y}), {classCell.isPreview}");
             }
