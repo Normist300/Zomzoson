@@ -16,6 +16,12 @@ public class GridController : MonoBehaviour, IController
 
     public Vector2Int currentMouseEnter = new Vector2Int(-1, -1);
 
+    public enum CellSideType
+    {
+        None,       // Пустая сторона
+        Road        // Дорога
+    }
+
     private void Start()
     {
         grid.eventGridReady += onGridReady;
@@ -107,6 +113,7 @@ public class GridController : MonoBehaviour, IController
     }
 
     public void onEnterMount(Vector2Int pos)
+    // Удаляет превью при заходе на смонтированную ячейку и обновляет currentMouseEnter
     {
         if (currentMouseEnter != new Vector2Int(-1, -1))
         {

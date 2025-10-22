@@ -13,7 +13,8 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public bool isEmptyCell = false;
     public bool isClicked = false;
     public bool isPreview = false;
-    public bool isMounted = false;
+    public bool isMounted = false; // Удаляет превью при заходе на смонтированную ячейку и обновляет currentMouseEnter
+    public bool isAvailableForMount = false;
     [SerializeField] private Color highlightColor = Color.green;
     [SerializeField] private float intensity = 2.0f;
     [SerializeField] private Color highlightColorClicked = Color.green;
@@ -24,6 +25,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public event Action<Vector2Int> eventEnterMount;
     public UIController uiController;
     public GridController gridController;
+    public GridController.CellSideType[] cellSideType = new GridController.CellSideType[4]; // 0 - вверх, 1 - право, 2 - вниз, 3 - лево
 
     private Renderer[] _renderers;
     private readonly List<Material> _materials = new();
@@ -47,54 +49,12 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         gridController = FindFirstObjectByType<GridController>();
     }
 
-    public void SetHighlight(bool on)
-    {
-        if (isClicked) { return; } // Если уже кликнут, то выделять не надо
-
-        if (on)
-        {
-            foreach (var m in _materials)
-            {
-                m.EnableKeyword("_EMISSION");
-                m.SetColor("_EmissionColor", highlightColor * intensity);
-            }
-        }
-        else
-        {
-            foreach (var m in _materials)
-            {
-                m.DisableKeyword("_EMISSION");
-            }
-        }
-    }
-
-    public void SetHighlightClicked(bool on)
-    {
-        if (on)
-        {
-            if (isClicked && // Если выделен + включена эмиссия, то выходим
-                _materials[0].IsKeywordEnabled("_EMISSION")) { return; }
-            foreach (var m in _materials)
-            {
-                m.EnableKeyword("_EMISSION");
-                m.SetColor("_EmissionColor", highlightColorClicked * intensityClicked);
-            }
-        }
-        else
-        {
-            foreach (var m in _materials)
-            {
-                m.DisableKeyword("_EMISSION");
-            }
-        }
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (isPreview)
+        Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
+        Debug.Log($"{pos.x}, {pos.y}");
+        if (isPreview && eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
-            Debug.Log($"{pos.x}, {pos.y}");
             eventReplaceCell.Invoke(pos);
         }
     }
@@ -104,6 +64,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         //Debug.Log($"Enter {pos.x} {pos.y} with {eventData.button}");
         if (uiController.isSelected)
         {
+
             if (!isPreview && !isMounted)
             {
                 eventPreview.Invoke(pos);
@@ -118,10 +79,6 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log($"Exit {pos.x} {pos.y} with {eventData.button}");
-        if (uiController.isSelected)
-        {
-            
-        }
     }
 
     public void Subscribe(GridController gridController)

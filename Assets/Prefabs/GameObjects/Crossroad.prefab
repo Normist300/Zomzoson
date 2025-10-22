@@ -270,14 +270,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02d28e259795f0419af5af291766fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cell
+  xPos: 0
+  yPos: 0
+  pos: {x: 0, y: 0}
+  isEmptyCell: 0
+  isClicked: 0
+  isPreview: 0
+  isMounted: 0
   highlightColor: {r: 0, g: 1, b: 0, a: 1}
   intensity: 2
   highlightColorClicked: {r: 0, g: 1, b: 0, a: 1}
   intensityClicked: 2
-  isClicked: 0
-  eventReplaceCell:
-    m_PersistentCalls:
-      m_Calls: []
+  uiController: {fileID: 0}
+  gridController: {fileID: 0}
+  cellSideType: 01000000010000000100000001000000
 --- !u!1 &7396244256788920566
 GameObject:
   m_ObjectHideFlags: 0

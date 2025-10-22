@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ccf87064c51948744bcd5a2c7c8a19f7, type: 2}
+    - target: {fileID: 4725113492795984353, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
+      propertyPath: 'cellSideType.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725113492795984353, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
+      propertyPath: 'cellSideType.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6590673541786021084, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
       propertyPath: m_Name
       value: Road
