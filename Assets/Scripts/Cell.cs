@@ -53,7 +53,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     {
         Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
         Debug.Log($"{pos.x}, {pos.y}");
-        if (isPreview && eventData.button == PointerEventData.InputButton.Left)
+        if (isPreview && isAvailableForMount && eventData.button == PointerEventData.InputButton.Left)
         {
             eventReplaceCell.Invoke(pos);
         }
@@ -83,18 +83,18 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void Subscribe(GridController gridController)
     {
-        eventReplaceCell += gridController.onReplaceCell;
-        eventPreview += gridController.onPreview;
-        eventDisPreview += gridController.onDisPreview;
+        eventReplaceCell += gridController.OnReplaceCell;
+        eventPreview += gridController.OnPreview;
+        eventDisPreview += gridController.OnDisPreview;
         eventEnterMount += gridController.onEnterMount;
         gridController.subscribedCells.Add(this);
     }
 
     public void Unsubscribe(GridController gridController)
     {
-        eventReplaceCell -= gridController.onReplaceCell;
-        eventPreview -= gridController.onPreview;
-        eventDisPreview -= gridController.onDisPreview;
+        eventReplaceCell -= gridController.OnReplaceCell;
+        eventPreview -= gridController.OnPreview;
+        eventDisPreview -= gridController.OnDisPreview;
         eventEnterMount -= gridController.onEnterMount;
         gridController.subscribedCells.Remove(this);
     }

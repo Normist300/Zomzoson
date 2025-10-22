@@ -13,6 +13,7 @@ public class GridController : MonoBehaviour, IController
     [SerializeField] private Grid grid;
     [SerializeField] private UIController UIcontroller;
     public Material materialPreviewMode;
+    public Material materialAvailablePreviewMode;
 
     public Vector2Int currentMouseEnter = new Vector2Int(-1, -1);
 
@@ -55,7 +56,7 @@ public class GridController : MonoBehaviour, IController
         OnEnable();
     }
 
-    public void onReplaceCell(Vector2Int pos)
+    public void OnReplaceCell(Vector2Int pos)
     {
         if (UIcontroller.currentGameObject != null)
         {
@@ -68,26 +69,85 @@ public class GridController : MonoBehaviour, IController
 
     }
 
-    public void onPreview(Vector2Int pos)
+    public bool IsCellAvailableForMount(Vector2Int pos) // Проверяем стороны на соответствие
+    {
+        bool[] sides = new bool[4];
+        Cell cell = grid.GetCell(pos).GetComponent<Cell>();
+        
+        if (pos.y + 1 <= grid.height)
+        {
+            Cell cellUp = grid.GetCell(new Vector2Int(pos.x, pos.y + 1)).GetComponent<Cell>();
+            if (cellUp.cellSideType[2] == cell.cellSideType[0])
+            {
+                sides[0] = true;
+            }
+        }
+        else sides[0] = true;
+        if (pos.x + 1 <= grid.width)
+        {
+            Cell cellRight = grid.GetCell(new Vector2Int(pos.x + 1, pos.y)).GetComponent<Cell>();
+            if (cellRight.cellSideType[3] == cell.cellSideType[1])
+            {
+                sides[1] = true;
+            }
+        }
+        else sides[1] = true;
+        if (pos.y - 1 >= 0)
+        {
+            Cell cellDown = grid.GetCell(new Vector2Int(pos.x, pos.y - 1)).GetComponent<Cell>();
+            if (cellDown.cellSideType[0] == cell.cellSideType[2])
+            {
+                sides[2] = true;
+            }
+        }
+        else sides[2] = true;
+        if (pos.x - 1 >= 0)
+        {
+            Cell cellLeft = grid.GetCell(new Vector2Int(pos.x - 1, pos.y)).GetComponent<Cell>();
+            if (cellLeft.cellSideType[1] == cell.cellSideType[3])
+            {
+                sides[3] = true;
+            }
+        }
+        else sides[3] = true;
+
+        return sides.All(s => s); // true, если все стороны подходят
+    }
+
+    public void OnPreview(Vector2Int pos)
     {
         if (UIcontroller.currentGameObject != null)
         {
-            GameObject pasteObject = Instantiate(UIcontroller.currentGameObject);
-            Renderer[] rendsPasteObject = pasteObject.GetComponentsInChildren<Renderer>();
+            Material requiredMaterial;
+
+            GameObject previewObject = Instantiate(UIcontroller.currentGameObject);
+            Renderer[] rendsPasteObject = previewObject.GetComponentsInChildren<Renderer>();
+            Cell cellPreview = previewObject.GetComponent<Cell>();
+
+            // Определяем доступность размещения (проверяем соседние ячейки и их стороны)
+            if (IsCellAvailableForMount(pos))
+            {
+                requiredMaterial = materialAvailablePreviewMode;
+                cellPreview.isAvailableForMount = true;
+            }
+            else
+            {
+                requiredMaterial = materialPreviewMode;
+            }
+            cellPreview.isPreview = true;
+
             foreach (Renderer rend in rendsPasteObject)
             {
                 rend.material = materialPreviewMode;
             }
-            Cell classCellPreviewObject = pasteObject.GetComponent<Cell>();
-            classCellPreviewObject.isPreview = true; 
-            grid.ReplaceCell(pos, pasteObject);
+            grid.ReplaceCell(pos, previewObject);
 
-            if (currentMouseEnter != new Vector2Int(-1, -1))
-            {
+            if (currentMouseEnter != new Vector2Int(-1, -1)) //Удаляем прошлую превью
+            { 
                 Cell pastClassCell = grid.GetCell(currentMouseEnter).GetComponent<Cell>();
                 if (!pastClassCell.isMounted)
                 {
-                    onDisPreview(currentMouseEnter);
+                    OnDisPreview(currentMouseEnter);
                     currentMouseEnter = pos;
                 }
                 else
@@ -103,7 +163,7 @@ public class GridController : MonoBehaviour, IController
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
     }
 
-    public void onDisPreview(Vector2Int pos)
+    public void OnDisPreview(Vector2Int pos)
     {
          if (UIcontroller.currentGameObject != null)
         {
@@ -120,7 +180,7 @@ public class GridController : MonoBehaviour, IController
             Cell pastClassCell = grid.GetCell(currentMouseEnter).GetComponent<Cell>();
             if (pastClassCell.isPreview)
             {
-                onDisPreview(currentMouseEnter);
+                OnDisPreview(currentMouseEnter);
                 currentMouseEnter = pos;
             }
         }
