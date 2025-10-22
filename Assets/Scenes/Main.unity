@@ -514,7 +514,8 @@ MonoBehaviour:
   grid: {fileID: 1580767881}
   UIcontroller: {fileID: 1270351521}
   materialPreviewMode: {fileID: 2100000, guid: 665041ba32105df458595e0c46434cf3, type: 2}
-  currentPreview: {x: -1, y: -1}
+  materialAvailablePreviewMode: {fileID: 2100000, guid: 9c3e0ec45eaf4224d9ef504405027710, type: 2}
+  currentMouseEnter: {x: -1, y: -1}
 --- !u!4 &475446652
 Transform:
   m_ObjectHideFlags: 0
