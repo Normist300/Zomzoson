@@ -91,7 +91,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (isEmptyCell)
+        if (isPreview)
         {
             Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
             Debug.Log($"{pos.x}, {pos.y}");
@@ -101,7 +101,6 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //var r = GetComponent<Renderer>();
         //Debug.Log($"Enter {pos.x} {pos.y} with {eventData.button}");
         if (uiController.isSelected)
         {
@@ -118,7 +117,6 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //var r = GetComponent<Renderer>();
         Debug.Log($"Exit {pos.x} {pos.y} with {eventData.button}");
         if (uiController.isSelected)
         {
