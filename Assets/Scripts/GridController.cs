@@ -76,7 +76,7 @@ public class GridController : MonoBehaviour, IController
         bool[] isSideNone = new bool[4];
         Cell cell = UIcontroller.currentGameObject.GetComponent<Cell>();
 
-        
+
         if (pos.y + 1 <= grid.height - 1)
         {
             Cell cellUp = grid.GetCell(new Vector2Int(pos.x, pos.y + 1)).GetComponent<Cell>();
@@ -89,7 +89,11 @@ public class GridController : MonoBehaviour, IController
                 }
             }
         }
-        else isSideNone[0] = true;
+        else
+        {
+            sides[0] = true;
+            isSideNone[0] = true;
+        }
         if (pos.x + 1 <= grid.width - 1)
         {
             Cell cellRight = grid.GetCell(new Vector2Int(pos.x + 1, pos.y)).GetComponent<Cell>();
@@ -102,7 +106,11 @@ public class GridController : MonoBehaviour, IController
                 }
             }
         }
-        else isSideNone[1] = true;
+        else
+        {
+            sides[1] = true;
+            isSideNone[1] = true;
+        }
         if (pos.y - 1 >= 0)
         {
             Cell cellDown = grid.GetCell(new Vector2Int(pos.x, pos.y - 1)).GetComponent<Cell>();
@@ -115,7 +123,11 @@ public class GridController : MonoBehaviour, IController
                 }
             }
         }
-        else isSideNone[2] = true;
+        else
+        {
+            sides[2] = true;
+            isSideNone[2] = true;
+        }
         if (pos.x - 1 >= 0)
         {
             Cell cellLeft = grid.GetCell(new Vector2Int(pos.x - 1, pos.y)).GetComponent<Cell>();
@@ -128,7 +140,11 @@ public class GridController : MonoBehaviour, IController
                 }
             }
         }
-        else isSideNone[3] = true;
+        else
+        {
+            sides[3] = true;
+            isSideNone[3] = true;
+        }
 
         if (isSideNone.All(n => n)) // Если все стороны None, то нельзя монтировать
         {
