@@ -15,9 +15,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public bool isPreview = false;
     public bool isMounted = false; // Удаляет превью при заходе на смонтированную ячейку и обновляет currentMouseEnter
     public bool isAvailableForMount = false;
-    [SerializeField] private Color highlightColor = Color.green;
     [SerializeField] private float intensity = 2.0f;
-    [SerializeField] private Color highlightColorClicked = Color.green;
     [SerializeField] private float intensityClicked = 2.0f;
     public event Action<Vector2Int> eventReplaceCell;
     public event Action<Vector2Int> eventPreview;
