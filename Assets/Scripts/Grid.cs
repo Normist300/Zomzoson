@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,22 +6,22 @@ using UnityEngine.UIElements;
 public class Grid : MonoBehaviour
 {
     public event Action eventGridReady;
-
-    // Размер сетки
+    // СЋС‚С„8
+    // Р Р°Р·РјРµСЂ СЃРµС‚РєРё
     public int width = 10;
     public int height = 10;
     public int indentX = 10;
     public int indentZ = 10;
 
-    // Размер ячеек
+    // Р Р°Р·РјРµСЂ СЏС‡РµРµРє
     public float cellSize = 1f;
 
-    // Префаб для клеток (например, куб)
+    // РџСЂРµС„Р°Р± РґР»СЏ РєР»РµС‚РѕРє (РЅР°РїСЂРёРјРµСЂ, РєСѓР±)
     public GameObject cellSpace;
     public GameObject cellFirst;
     public GridController gridController;
 
-    // Вложенный словарь для хранения объектов сетки
+    // Р’Р»РѕР¶РµРЅРЅС‹Р№ СЃР»РѕРІР°СЂСЊ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РѕР±СЉРµРєС‚РѕРІ СЃРµС‚РєРё
     private Dictionary<int, Dictionary<int, GameObject>> gridCells = new Dictionary<int, Dictionary<int, GameObject>>();
 
     private Vector3 objectPosition;
@@ -42,7 +42,7 @@ public class Grid : MonoBehaviour
         return instanGo;
     }
 
-    // Генерация сетки
+    // Р“РµРЅРµСЂР°С†РёСЏ СЃРµС‚РєРё
     void GenerateGrid()
     {
         Vector3 objectPosition = transform.position;
@@ -52,11 +52,11 @@ public class Grid : MonoBehaviour
 
             for (int z = 0; z < height; z++)
             {
-                // Вычисление позиции для каждой ячейки
+                // Р’С‹С‡РёСЃР»РµРЅРёРµ РїРѕР·РёС†РёРё РґР»СЏ РєР°Р¶РґРѕР№ СЏС‡РµР№РєРё
                 Vector3 position = new Vector3(x * cellSize + objectPosition.x + indentX, objectPosition.y,
                                                z * cellSize + objectPosition.z + indentZ);
 
-                // Создание ячейки
+                // РЎРѕР·РґР°РЅРёРµ СЏС‡РµР№РєРё
                 GameObject cell = Instantiate(cellSpace, position, Quaternion.identity, transform);
                 Cell classCell = cell.GetComponent<Cell>();
                 if (classCell != null)
@@ -65,18 +65,18 @@ public class Grid : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Не найден класс Cell");
+                    Debug.Log("РќРµ РЅР°Р№РґРµРЅ РєР»Р°СЃСЃ Cell");
                 }
-                // Сохраняем ссылку на созданный объект в словарь
+                // РЎРѕС…СЂР°РЅСЏРµРј СЃСЃС‹Р»РєСѓ РЅР° СЃРѕР·РґР°РЅРЅС‹Р№ РѕР±СЉРµРєС‚ РІ СЃР»РѕРІР°СЂСЊ
                 gridCells[x][z] = cell;
             }
         }
 
-        // Пример вывода в консоль всех созданных объектов
+        // РџСЂРёРјРµСЂ РІС‹РІРѕРґР° РІ РєРѕРЅСЃРѕР»СЊ РІСЃРµС… СЃРѕР·РґР°РЅРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
         Debug.Log("Created " + gridCells.Count + " rows of grid cells.");
     }
 
-    // Пример метода для получения объекта по координатам
+    // РџСЂРёРјРµСЂ РјРµС‚РѕРґР° РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РѕР±СЉРµРєС‚Р° РїРѕ РєРѕРѕСЂРґРёРЅР°С‚Р°Рј
     public GameObject GetCell(Vector2Int pos)
     {
         if (gridCells.ContainsKey(pos.x) && gridCells[pos.x].ContainsKey(pos.y))
@@ -85,7 +85,7 @@ public class Grid : MonoBehaviour
         }
         else
         {
-            return null; // Если ячейка не найдена
+            return null; // Р•СЃР»Рё СЏС‡РµР№РєР° РЅРµ РЅР°Р№РґРµРЅР°
         }
     }
 
@@ -104,7 +104,7 @@ public class Grid : MonoBehaviour
                 newGoClassCell.Subscribe(gridController);
                 newGoClassCell.SetValues(pos);
                 newGoCell.transform.SetParent(transform);
-                Debug.Log($"Создана ячейка в ({pos}), {newGoClassCell.isPreview}");
+                Debug.Log($"РЎРѕР·РґР°РЅР° СЏС‡РµР№РєР° РІ ({pos}), {newGoClassCell.isPreview}");
             }
             else
             {
@@ -113,28 +113,28 @@ public class Grid : MonoBehaviour
                 Cell classCell = goCell.GetComponent<Cell>();
                 classCell.Subscribe(gridController);
                 classCell.SetValues(pos);
-                Debug.Log($"Создана ячейка в ({pos}), {classCell.isPreview}");
+                Debug.Log($"РЎРѕР·РґР°РЅР° СЏС‡РµР№РєР° РІ ({pos}), {classCell.isPreview}");
             }
             
         }
         else
         {
-            Debug.Log($"Место для ячейки ({pos}) занято");
+            Debug.Log($"РњРµСЃС‚Рѕ РґР»СЏ СЏС‡РµР№РєРё ({pos}) Р·Р°РЅСЏС‚Рѕ");
         }
     }
 
-    // Пример метода для удаления всех ячеек
+    // РџСЂРёРјРµСЂ РјРµС‚РѕРґР° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ РІСЃРµС… СЏС‡РµРµРє
     public void DestroyAllCells()
     {
         foreach (var row in gridCells)
         {
             foreach (var cell in row.Value)
             {
-                Destroy(cell.Value); // Удаление ячейки
+                Destroy(cell.Value); // РЈРґР°Р»РµРЅРёРµ СЏС‡РµР№РєРё
             }
         }
 
-        gridCells.Clear(); // Очищаем словарь после удаления
+        gridCells.Clear(); // РћС‡РёС‰Р°РµРј СЃР»РѕРІР°СЂСЊ РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ
         Debug.Log("All cells destroyed.");
     }
 
@@ -153,7 +153,7 @@ public class Grid : MonoBehaviour
         }
         else
         {
-            Debug.Log("Не найдена ячейка"); // Если ячейка не найдена
+            Debug.Log("РќРµ РЅР°Р№РґРµРЅР° СЏС‡РµР№РєР°"); // Р•СЃР»Рё СЏС‡РµР№РєР° РЅРµ РЅР°Р№РґРµРЅР°
         }
     }
 }

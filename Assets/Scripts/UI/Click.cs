@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using EasyButtons;
@@ -24,21 +24,21 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
 
     void Awake()
     {
-        // Берём все Renderer в себе и детях
+        // Р‘РµСЂС‘Рј РІСЃРµ Renderer РІ СЃРµР±Рµ Рё РґРµС‚СЏС…
         _renderers = GetComponentsInChildren<Renderer>(includeInactive: false);
         foreach (var r in _renderers)
         {
-            // Важно: у одного Renderer может быть несколько материалов
-            _materials.AddRange(r.materials); // инстансы материалов на каждом объекте
+            // Р’Р°Р¶РЅРѕ: Сѓ РѕРґРЅРѕРіРѕ Renderer РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ РјР°С‚РµСЂРёР°Р»РѕРІ
+            _materials.AddRange(r.materials); // РёРЅСЃС‚Р°РЅСЃС‹ РјР°С‚РµСЂРёР°Р»РѕРІ РЅР° РєР°Р¶РґРѕРј РѕР±СЉРµРєС‚Рµ
         }
     }
 
     public void SetHighlight(bool on)
     {
-        if (isClicked) { return; } // Если уже кликнут, то выделять не надо
+        if (isClicked) { return; } // Р•СЃР»Рё СѓР¶Рµ РєР»РёРєРЅСѓС‚, С‚Рѕ РІС‹РґРµР»СЏС‚СЊ РЅРµ РЅР°РґРѕ
 
         if (on)
-        {
+        {// СЋС‚С„8
             foreach (var m in _materials)
             {
                 m.EnableKeyword("_EMISSION");
@@ -58,7 +58,7 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     {
         if (on)
         {
-            if (isClicked && // Если выделен + включена эмиссия, то выходим
+            if (isClicked && // Р•СЃР»Рё РІС‹РґРµР»РµРЅ + РІРєР»СЋС‡РµРЅР° СЌРјРёСЃСЃРёСЏ, С‚Рѕ РІС‹С…РѕРґРёРј
                 _materials[0].IsKeywordEnabled("_EMISSION")) { return; }
             foreach (var m in _materials)
             {

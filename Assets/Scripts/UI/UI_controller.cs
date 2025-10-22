@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +13,7 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        // Подключение ивентов со всех экземпляров
+        // РџРѕРґРєР»СЋС‡РµРЅРёРµ РёРІРµРЅС‚РѕРІ СЃРѕ РІСЃРµС… СЌРєР·РµРјРїР»СЏСЂРѕРІ
         tiles = GetComponentsInChildren<Click>()
                                .Where(t => t.CompareTag("UITile"))
                                .ToArray();
@@ -27,8 +27,8 @@ public class UIController : MonoBehaviour
     }
 
     private void OnDisable()
-    {
-        // Отключение ивентов со всех экземпляров
+    {// СЋС‚С„8
+        // РћС‚РєР»СЋС‡РµРЅРёРµ РёРІРµРЅС‚РѕРІ СЃРѕ РІСЃРµС… СЌРєР·РµРјРїР»СЏСЂРѕРІ
         foreach (var tile in subscribedClicks)
         {
             tile.eventSelectTile -= onSelectTile;

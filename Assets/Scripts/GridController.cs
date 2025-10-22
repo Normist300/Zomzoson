@@ -1,4 +1,4 @@
-using NUnit.Framework.Constraints;
+п»їusing NUnit.Framework.Constraints;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -17,9 +17,9 @@ public class GridController : MonoBehaviour, IController
     public Vector2Int currentMouseEnter = new Vector2Int(-1, -1);
 
     public enum CellSideType
-    {
-        None,       // Пустая сторона
-        Road        // Дорога
+    {// СЋС‚С„8
+        None,       // РџСѓСЃС‚Р°СЏ СЃС‚РѕСЂРѕРЅР°
+        Road        // Р”РѕСЂРѕРіР°
     }
 
     private void Start()
@@ -29,7 +29,7 @@ public class GridController : MonoBehaviour, IController
 
     private void OnEnable()
     {
-        // Подключение ивентов со всех экземпляров
+        // РџРѕРґРєР»СЋС‡РµРЅРёРµ РёРІРµРЅС‚РѕРІ СЃРѕ РІСЃРµС… СЌРєР·РµРјРїР»СЏСЂРѕРІ
         iSubCells = GetComponentsInChildren<Cell>()
                                .Where(t => t.CompareTag("Cell"))
                                .ToArray();
@@ -42,8 +42,8 @@ public class GridController : MonoBehaviour, IController
 
     private void OnDisable()
     {
-        // Отключение ивентов со всех экземпляров
-        foreach (var cell in subscribedCells.ToList()) // ToList() чтобы не было ошибки
+        // РћС‚РєР»СЋС‡РµРЅРёРµ РёРІРµРЅС‚РѕРІ СЃРѕ РІСЃРµС… СЌРєР·РµРјРїР»СЏСЂРѕРІ
+        foreach (var cell in subscribedCells.ToList()) // ToList() С‡С‚РѕР±С‹ РЅРµ Р±С‹Р»Рѕ РѕС€РёР±РєРё
         {
             cell.Unsubscribe(this);
         }
@@ -113,7 +113,7 @@ public class GridController : MonoBehaviour, IController
     }
 
     public void onEnterMount(Vector2Int pos)
-    // Удаляет превью при заходе на смонтированную ячейку и обновляет currentMouseEnter
+    // РЈРґР°Р»СЏРµС‚ РїСЂРµРІСЊСЋ РїСЂРё Р·Р°С…РѕРґРµ РЅР° СЃРјРѕРЅС‚РёСЂРѕРІР°РЅРЅСѓСЋ СЏС‡РµР№РєСѓ Рё РѕР±РЅРѕРІР»СЏРµС‚ currentMouseEnter
     {
         if (currentMouseEnter != new Vector2Int(-1, -1))
         {

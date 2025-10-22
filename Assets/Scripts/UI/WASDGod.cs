@@ -1,37 +1,37 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 public class WASDGod : MonoBehaviour
 {
-    public float moveSpeed = 5f;  // Скорость перемещения
-    public float scrollSpeed = 2f; // Скорость перемещения по оси Y (вверх/вниз) при прокрутке колесика мыши
+    public float moveSpeed = 5f;  // РЎРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ
+    public float scrollSpeed = 2f; // РЎРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ РїРѕ РѕСЃРё Y (РІРІРµСЂС…/РІРЅРёР·) РїСЂРё РїСЂРѕРєСЂСѓС‚РєРµ РєРѕР»РµСЃРёРєР° РјС‹С€Рё
 
-    // Пределы движения по вертикали
-    public float minY = 20f;  // Минимальное значение для оси Y
-    public float maxY = 100f; // Максимальное значение для оси Y
+    // РџСЂРµРґРµР»С‹ РґРІРёР¶РµРЅРёСЏ РїРѕ РІРµСЂС‚РёРєР°Р»Рё
+    public float minY = 20f;  // РњРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ РѕСЃРё Y
+    public float maxY = 100f; // РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ РѕСЃРё Y
     public float minYVelocity = 0.2f;
     public float maxYVelocity = 1f;
     void Update()
-    {
-        // Получаем ввод от пользователя для перемещения по осям X и Z
-        float moveHorizontal = Input.GetAxis("Horizontal");  // A/D или стрелки влево/вправ (клавиша A = -1, D = 1)
-        float moveVertical = Input.GetAxis("Vertical");  // W/S или стрелки вверх/вниз (клавиша W = 1, S = -1)
+    {// СЋС‚С„8
+        // РџРѕР»СѓС‡Р°РµРј РІРІРѕРґ РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РґР»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ РїРѕ РѕСЃСЏРј X Рё Z
+        float moveHorizontal = Input.GetAxis("Horizontal");  // A/D РёР»Рё СЃС‚СЂРµР»РєРё РІР»РµРІРѕ/РІРїСЂР°РІ (РєР»Р°РІРёС€Р° A = -1, D = 1)
+        float moveVertical = Input.GetAxis("Vertical");  // W/S РёР»Рё СЃС‚СЂРµР»РєРё РІРІРµСЂС…/РІРЅРёР· (РєР»Р°РІРёС€Р° W = 1, S = -1)
 
-        // Получаем ввод от колесика мыши для перемещения по оси Y (вверх/вниз)
+        // РџРѕР»СѓС‡Р°РµРј РІРІРѕРґ РѕС‚ РєРѕР»РµСЃРёРєР° РјС‹С€Рё РґР»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ РїРѕ РѕСЃРё Y (РІРІРµСЂС…/РІРЅРёР·)
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 
-        // Рассчитываем движение по осям X, Y и Z
-        float yVelocity = Mathf.InverseLerp(minY, maxY, transform.position.y); // Нормализуем сначала координатно
-        yVelocity = Mathf.Lerp(minYVelocity, maxYVelocity, yVelocity); // А потом до нужного коэфицента
+        // Р Р°СЃСЃС‡РёС‚С‹РІР°РµРј РґРІРёР¶РµРЅРёРµ РїРѕ РѕСЃСЏРј X, Y Рё Z
+        float yVelocity = Mathf.InverseLerp(minY, maxY, transform.position.y); // РќРѕСЂРјР°Р»РёР·СѓРµРј СЃРЅР°С‡Р°Р»Р° РєРѕРѕСЂРґРёРЅР°С‚РЅРѕ
+        yVelocity = Mathf.Lerp(minYVelocity, maxYVelocity, yVelocity); // Рђ РїРѕС‚РѕРј РґРѕ РЅСѓР¶РЅРѕРіРѕ РєРѕСЌС„РёС†РµРЅС‚Р°
         Vector3 movement = new Vector3(moveHorizontal * moveSpeed * yVelocity, -scrollInput * scrollSpeed, 
                                        moveVertical * moveSpeed * yVelocity) * Time.deltaTime;
 
-        // Получаем текущую позицию объекта
+        // РџРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰СѓСЋ РїРѕР·РёС†РёСЋ РѕР±СЉРµРєС‚Р°
         Vector3 newPosition = transform.position + movement;
 
-        // Ограничиваем движение по оси Y
+        // РћРіСЂР°РЅРёС‡РёРІР°РµРј РґРІРёР¶РµРЅРёРµ РїРѕ РѕСЃРё Y
         newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
 
-        // Применяем новую позицию
+        // РџСЂРёРјРµРЅСЏРµРј РЅРѕРІСѓСЋ РїРѕР·РёС†РёСЋ
         transform.position = newPosition;
     }
 }

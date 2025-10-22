@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,7 +13,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public bool isEmptyCell = false;
     public bool isClicked = false;
     public bool isPreview = false;
-    public bool isMounted = false; // Удаляет превью при заходе на смонтированную ячейку и обновляет currentMouseEnter
+    public bool isMounted = false; // РЈРґР°Р»СЏРµС‚ РїСЂРµРІСЊСЋ РїСЂРё Р·Р°С…РѕРґРµ РЅР° СЃРјРѕРЅС‚РёСЂРѕРІР°РЅРЅСѓСЋ СЏС‡РµР№РєСѓ Рё РѕР±РЅРѕРІР»СЏРµС‚ currentMouseEnter
     public bool isAvailableForMount = false;
     [SerializeField] private Color highlightColor = Color.green;
     [SerializeField] private float intensity = 2.0f;
@@ -25,7 +25,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public event Action<Vector2Int> eventEnterMount;
     public UIController uiController;
     public GridController gridController;
-    public GridController.CellSideType[] cellSideType = new GridController.CellSideType[4]; // 0 - вверх, 1 - право, 2 - вниз, 3 - лево
+    public GridController.CellSideType[] cellSideType = new GridController.CellSideType[4]; // 0 - РІРІРµСЂС…, 1 - РїСЂР°РІРѕ, 2 - РІРЅРёР·, 3 - Р»РµРІРѕ
 
     private Renderer[] _renderers;
     private readonly List<Material> _materials = new();
@@ -38,12 +38,12 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     void Awake()
     {
-        // Берём все Renderer в себе и детях
+        // Р‘РµСЂС‘Рј РІСЃРµ Renderer РІ СЃРµР±Рµ Рё РґРµС‚СЏС…
         _renderers = GetComponentsInChildren<Renderer>(includeInactive: false);
         foreach (var r in _renderers)
         {
-            // Важно: у одного Renderer может быть несколько материалов
-            _materials.AddRange(r.materials); // инстансы материалов на каждом объекте
+            // Р’Р°Р¶РЅРѕ: Сѓ РѕРґРЅРѕРіРѕ Renderer РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ РјР°С‚РµСЂРёР°Р»РѕРІ
+            _materials.AddRange(r.materials); // РёРЅСЃС‚Р°РЅСЃС‹ РјР°С‚РµСЂРёР°Р»РѕРІ РЅР° РєР°Р¶РґРѕРј РѕР±СЉРµРєС‚Рµ
         }
         uiController = FindFirstObjectByType<UIController>();
         gridController = FindFirstObjectByType<GridController>();
@@ -89,7 +89,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         eventEnterMount += gridController.onEnterMount;
         gridController.subscribedCells.Add(this);
     }
-
+    // С‚РµСЃ
     public void Unsubscribe(GridController gridController)
     {
         eventReplaceCell -= gridController.onReplaceCell;
