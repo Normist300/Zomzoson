@@ -20,7 +20,8 @@ public class GridController : MonoBehaviour, IController
     public enum CellSideType
     {
         None,       // Пустая сторона
-        Road        // Дорога
+        Road,       // Дорога
+        Nothing     // Ничего
     }
 
     private void Start()
@@ -72,45 +73,67 @@ public class GridController : MonoBehaviour, IController
     public bool IsCellAvailableForMount(Vector2Int pos) // Проверяем стороны на соответствие
     {
         bool[] sides = new bool[4];
-        Cell cell = grid.GetCell(pos).GetComponent<Cell>();
+        bool[] isSideNone = new bool[4];
+        Cell cell = UIcontroller.currentGameObject.GetComponent<Cell>();
+
         
         if (pos.y + 1 <= grid.height)
         {
             Cell cellUp = grid.GetCell(new Vector2Int(pos.x, pos.y + 1)).GetComponent<Cell>();
-            if (cellUp.cellSideType[2] == cell.cellSideType[0])
+            if (cellUp.cellSideType[2] == cell.cellSideType[0] || cellUp.cellSideType[2] == CellSideType.None)
             {
                 sides[0] = true;
+                if (cellUp.cellSideType[2] == CellSideType.None)
+                {
+                    isSideNone[0] = true;
+                }
             }
         }
         else sides[0] = true;
         if (pos.x + 1 <= grid.width)
         {
             Cell cellRight = grid.GetCell(new Vector2Int(pos.x + 1, pos.y)).GetComponent<Cell>();
-            if (cellRight.cellSideType[3] == cell.cellSideType[1])
+            if (cellRight.cellSideType[3] == cell.cellSideType[1] || cellRight.cellSideType[3] == CellSideType.None)
             {
                 sides[1] = true;
+                if (cellRight.cellSideType[3] == CellSideType.None)
+                {
+                    isSideNone[1] = true;
+                }
             }
         }
         else sides[1] = true;
         if (pos.y - 1 >= 0)
         {
             Cell cellDown = grid.GetCell(new Vector2Int(pos.x, pos.y - 1)).GetComponent<Cell>();
-            if (cellDown.cellSideType[0] == cell.cellSideType[2])
+            if (cellDown.cellSideType[0] == cell.cellSideType[2] || cellDown.cellSideType[0] == CellSideType.None)
             {
                 sides[2] = true;
+                if (cellDown.cellSideType[0] == CellSideType.None)
+                {
+                    isSideNone[2] = true;
+                }
             }
         }
         else sides[2] = true;
         if (pos.x - 1 >= 0)
         {
             Cell cellLeft = grid.GetCell(new Vector2Int(pos.x - 1, pos.y)).GetComponent<Cell>();
-            if (cellLeft.cellSideType[1] == cell.cellSideType[3])
+            if (cellLeft.cellSideType[1] == cell.cellSideType[3] || cellLeft.cellSideType[1] == CellSideType.None)
             {
                 sides[3] = true;
+                if (cellLeft.cellSideType[1] == CellSideType.None)
+                {
+                    isSideNone[3] = true;
+                }
             }
         }
         else sides[3] = true;
 
+        if (isSideNone.All(n => n)) // Если все стороны None, то нельзя монтировать
+        {
+            return false;
+        }
         return sides.All(s => s); // true, если все стороны подходят
     }
 
@@ -138,7 +161,7 @@ public class GridController : MonoBehaviour, IController
 
             foreach (Renderer rend in rendsPasteObject)
             {
-                rend.material = materialPreviewMode;
+                rend.material = requiredMaterial;
             }
             grid.ReplaceCell(pos, previewObject);
 
