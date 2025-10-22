@@ -89,7 +89,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         eventEnterMount += gridController.onEnterMount;
         gridController.subscribedCells.Add(this);
     }
-    // тес
+
     public void Unsubscribe(GridController gridController)
     {
         eventReplaceCell -= gridController.onReplaceCell;

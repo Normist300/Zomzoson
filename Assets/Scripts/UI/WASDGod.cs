@@ -11,7 +11,7 @@ public class WASDGod : MonoBehaviour
     public float minYVelocity = 0.2f;
     public float maxYVelocity = 1f;
     void Update()
-    {// ютф8
+    {
         // Получаем ввод от пользователя для перемещения по осям X и Z
         float moveHorizontal = Input.GetAxis("Horizontal");  // A/D или стрелки влево/вправ (клавиша A = -1, D = 1)
         float moveVertical = Input.GetAxis("Vertical");  // W/S или стрелки вверх/вниз (клавиша W = 1, S = -1)

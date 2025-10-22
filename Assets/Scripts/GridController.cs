@@ -17,7 +17,7 @@ public class GridController : MonoBehaviour, IController
     public Vector2Int currentMouseEnter = new Vector2Int(-1, -1);
 
     public enum CellSideType
-    {// ютф8
+    {
         None,       // Пустая сторона
         Road        // Дорога
     }

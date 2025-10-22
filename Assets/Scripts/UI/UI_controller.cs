@@ -27,7 +27,7 @@ public class UIController : MonoBehaviour
     }
 
     private void OnDisable()
-    {// ютф8
+    {
         // Отключение ивентов со всех экземпляров
         foreach (var tile in subscribedClicks)
         {

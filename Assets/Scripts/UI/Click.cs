@@ -38,7 +38,7 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
         if (isClicked) { return; } // Если уже кликнут, то выделять не надо
 
         if (on)
-        {// ютф8
+        {
             foreach (var m in _materials)
             {
                 m.EnableKeyword("_EMISSION");

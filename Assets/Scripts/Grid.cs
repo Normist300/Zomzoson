@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 public class Grid : MonoBehaviour
 {
     public event Action eventGridReady;
-    // ютф8
     // Размер сетки
     public int width = 10;
     public int height = 10;
