@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WASDGod : MonoBehaviour
 {
@@ -10,6 +11,26 @@ public class WASDGod : MonoBehaviour
     public float maxY = 100f; // Максимальное значение для оси Y
     public float minYVelocity = 0.2f;
     public float maxYVelocity = 1f;
+
+    public InputActionAsset InputActions;
+
+    private InputAction rotateCell;
+
+    private void OnEnable()
+    {
+        InputActions.FindActionMap("UI").Enable();
+    }
+
+    private void OnDisable()
+    {
+        InputActions.FindActionMap("UI").Disable();
+    }
+
+    private void Awake()
+    {
+        rotateCell = InputSystem.actions.FindAction("RotateCell");
+    }
+
     void Update()
     {
         // Получаем ввод от пользователя для перемещения по осям X и Z
@@ -22,7 +43,7 @@ public class WASDGod : MonoBehaviour
         // Рассчитываем движение по осям X, Y и Z
         float yVelocity = Mathf.InverseLerp(minY, maxY, transform.position.y); // Нормализуем сначала координатно
         yVelocity = Mathf.Lerp(minYVelocity, maxYVelocity, yVelocity); // А потом до нужного коэфицента
-        Vector3 movement = new Vector3(moveHorizontal * moveSpeed * yVelocity, -scrollInput * scrollSpeed, 
+        Vector3 movement = new Vector3(moveHorizontal * moveSpeed * yVelocity, -scrollInput * scrollSpeed,
                                        moveVertical * moveSpeed * yVelocity) * Time.deltaTime;
 
         // Получаем текущую позицию объекта
@@ -33,5 +54,7 @@ public class WASDGod : MonoBehaviour
 
         // Применяем новую позицию
         transform.position = newPosition;
+        
+        
     }
 }
