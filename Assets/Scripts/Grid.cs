@@ -155,4 +155,47 @@ public class Grid : MonoBehaviour
             Debug.Log("Не найдена ячейка"); // Если ячейка не найдена
         }
     }
+
+    public void RotateCell(Vector2Int pos)
+    {
+        GridController.Rotation currentGridRotation = gridController.currentRotation;
+        GameObject cell = GetCell(pos);
+        if (cell != null)
+        {
+            switch (currentGridRotation)
+            {
+                case GridController.Rotation.up:
+                    cell.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    break;
+                case GridController.Rotation.right:
+                    cell.transform.rotation = Quaternion.Euler(0, 90, 0);
+                    break;
+                case GridController.Rotation.down:
+                    cell.transform.rotation = Quaternion.Euler(0, 180, 0);
+                    break;
+                case GridController.Rotation.left:
+                    cell.transform.rotation = Quaternion.Euler(0, 270, 0);
+                    break;
+            }
+            Cell classCell = cell.GetComponent<Cell>();
+            GridController.Rotation currentCellRotation = classCell.currentRotation;
+            GridController.CellSideType newCellSideType = new GridController.CellSideType();
+            int deltaRotation = Math.Abs(currentCellRotation - currentGridRotation);
+            // Поворот типов сторон ячейки
+            if (deltaRotation > 0)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    int newIndex = (i + deltaRotation) % 4;
+                    newCellSideType = classCell.cellSideType[i];
+                    classCell.cellSideType[newIndex] = newCellSideType;
+                }
+            }
+            classCell.currentRotation = currentGridRotation;
+        }
+        else
+        {
+            Debug.Log("Не найдена ячейка для поворота"); // Если ячейка не найдена
+        }
+    }
 }

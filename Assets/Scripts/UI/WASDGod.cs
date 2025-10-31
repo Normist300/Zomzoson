@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WASDGod : MonoBehaviour
+public class WASDGod : MonoBehaviour, ISubscribable<GridController>
 {
     public float moveSpeed = 5f;  // Скорость перемещения
     public float scrollSpeed = 2f; // Скорость перемещения по оси Y (вверх/вниз) при прокрутке колесика мыши
@@ -15,6 +16,8 @@ public class WASDGod : MonoBehaviour
     public InputActionAsset InputActions;
 
     private InputAction rotateCell;
+
+    public event Action eventRotateCell;
 
     private void OnEnable()
     {
@@ -56,5 +59,19 @@ public class WASDGod : MonoBehaviour
         transform.position = newPosition;
         
         
+        if (rotateCell.WasPerformedThisFrame())
+        {
+            eventRotateCell.Invoke();
+        }
+    }
+
+    public void Subscribe(GridController gridController)
+    {
+        eventRotateCell += gridController.OnRotateCell;
+    }
+
+    public void Unsubscribe(GridController gridController)
+    {
+        eventRotateCell -= gridController.OnRotateCell;
     }
 }

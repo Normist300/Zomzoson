@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GridController : MonoBehaviour, IController
 {
     ISubscribable<GridController>[] iSubCells;
+    ISubscribable<GridController> wasdGod;
     public List<Cell> subscribedCells = new();
 
     [SerializeField] private Grid grid;
@@ -16,12 +17,21 @@ public class GridController : MonoBehaviour, IController
     public Material materialAvailablePreviewMode;
 
     public Vector2Int currentMouseEnter = new Vector2Int(-1, -1);
+    public Rotation currentRotation = Rotation.up;
+
+    public enum Rotation // Куда смотрит вверхняя сторона ячейки
+    {
+        up,     // 0
+        right,  // 90
+        down,   // 180
+        left    // 270
+    }
 
     public enum CellSideType
     {
-        None,       // Пустая сторона
+        None,       // Ничего
         Road,       // Дорога
-        Nothing     // Ничего
+        Nothing     // Как правило поле
     }
 
     private void Start()
@@ -40,6 +50,10 @@ public class GridController : MonoBehaviour, IController
         {
             cell.Subscribe(this);
         }
+
+        // Подписываем WASDGod
+        wasdGod = FindFirstObjectByType<WASDGod>();
+        wasdGod.Subscribe(this);
     }
 
     private void OnDisable()
@@ -50,6 +64,10 @@ public class GridController : MonoBehaviour, IController
             cell.Unsubscribe(this);
         }
         subscribedCells.Clear();
+
+        // Отписываем WASDGod
+        wasdGod.Unsubscribe(this);
+        wasdGod = null;
     }
 
     void onGridReady()
@@ -236,5 +254,12 @@ public class GridController : MonoBehaviour, IController
         {
             currentMouseEnter = pos;
         }
+    }
+
+    public void OnRotateCell()
+    {
+        // Меняем текущую ротацию по часовой стрелке
+        currentRotation = (Rotation)(((int)currentRotation + 1) % 4);
+        grid.RotateCell(currentMouseEnter);
     }
 }
