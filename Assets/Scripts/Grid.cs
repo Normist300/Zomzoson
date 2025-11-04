@@ -111,20 +111,7 @@ public class Grid : MonoBehaviour
                     break;
             }
             Cell classCell = cell.GetComponent<Cell>();
-            GridController.Rotation currentCellRotation = classCell.currentRotation;
-            GridController.CellSideType newCellSideType = new GridController.CellSideType();
-            int deltaRotation = Math.Abs(currentCellRotation - currentGridRotation);
-            // Поворот типов сторон ячейки
-            if (deltaRotation > 0)
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    int newIndex = (i + deltaRotation) % 4;
-                    newCellSideType = classCell.typeSideOfCell[i];
-                    classCell.typeSideOfCell[newIndex] = newCellSideType;
-                }
-            }
-            classCell.currentRotation = currentGridRotation;
+            gridController.RotateTypeSideOfCell(classCell);
         }
         else
         {

@@ -35,7 +35,7 @@ public class GridController : MonoBehaviour, IController
 
     private void Start()
     {
-        grid.eventGridReady += onGridReady;
+        grid.eventGridReady += OnGridReady;
     }
 
     private void OnEnable()
@@ -60,7 +60,7 @@ public class GridController : MonoBehaviour, IController
         wasdGod = null;
     }
 
-    void onGridReady()
+    void OnGridReady()
     {
         // Подключение ивентов со всех экземпляров
         iSubCells = GetComponentsInChildren<Cell>()
@@ -91,34 +91,34 @@ public class GridController : MonoBehaviour, IController
         Rotation currentCellRotation = classCell.currentRotation;
         Rotation currentGridRotation = currentRotation;
         int deltaRotation = Math.Abs(currentCellRotation - currentGridRotation);
-        CellSideType newCellSideType;
         // Поворот типов сторон ячейки
         if (deltaRotation > 0)
         {
+            CellSideType[] newTypesSidesOfCell = new CellSideType[4];
             for (int i = 0; i < 4; i++)
             {
                 int newIndex = (i + deltaRotation) % 4;
-                newCellSideType = classCell.typeSideOfCell[i];
-                classCell.typeSideOfCell[newIndex] = newCellSideType;
+                newTypesSidesOfCell[newIndex] = classCell.typesSidesOfCell[i];
             }
+            classCell.typesSidesOfCell = newTypesSidesOfCell;
+            classCell.currentRotation = currentGridRotation;
         }
-        classCell.currentRotation = currentGridRotation;
     }
 
-    public bool IsCellAvailableForMount(Vector2Int pos) // Проверяем стороны на соответствие
+    public bool IsCellAvailableForMount(Vector2Int pos, Cell classCell) // Проверяем стороны на соответствие
     {
         bool[] sides = new bool[4];
         bool[] isSideNone = new bool[4];
-        Cell cell = UIcontroller.currentGameObject.GetComponent<Cell>();
+        //Cell classCell = UIcontroller.currentGameObject.GetComponent<Cell>();
 
 
         if (pos.y + 1 <= grid.height - 1)
         {
             Cell cellUp = grid.GetCell(new Vector2Int(pos.x, pos.y + 1)).GetComponent<Cell>();
-            if (cellUp.typeSideOfCell[2] == cell.typeSideOfCell[0] || cellUp.typeSideOfCell[2] == CellSideType.None)
+            if (cellUp.typesSidesOfCell[2] == classCell.typesSidesOfCell[0] || cellUp.typesSidesOfCell[2] == CellSideType.None)
             {
                 sides[0] = true;
-                if (cellUp.typeSideOfCell[2] == CellSideType.None)
+                if (cellUp.typesSidesOfCell[2] == CellSideType.None)
                 {
                     isSideNone[0] = true;
                 }
@@ -132,10 +132,10 @@ public class GridController : MonoBehaviour, IController
         if (pos.x + 1 <= grid.width - 1)
         {
             Cell cellRight = grid.GetCell(new Vector2Int(pos.x + 1, pos.y)).GetComponent<Cell>();
-            if (cellRight.typeSideOfCell[3] == cell.typeSideOfCell[1] || cellRight.typeSideOfCell[3] == CellSideType.None)
+            if (cellRight.typesSidesOfCell[3] == classCell.typesSidesOfCell[1] || cellRight.typesSidesOfCell[3] == CellSideType.None)
             {
                 sides[1] = true;
-                if (cellRight.typeSideOfCell[3] == CellSideType.None)
+                if (cellRight.typesSidesOfCell[3] == CellSideType.None)
                 {
                     isSideNone[1] = true;
                 }
@@ -149,10 +149,10 @@ public class GridController : MonoBehaviour, IController
         if (pos.y - 1 >= 0)
         {
             Cell cellDown = grid.GetCell(new Vector2Int(pos.x, pos.y - 1)).GetComponent<Cell>();
-            if (cellDown.typeSideOfCell[0] == cell.typeSideOfCell[2] || cellDown.typeSideOfCell[0] == CellSideType.None)
+            if (cellDown.typesSidesOfCell[0] == classCell.typesSidesOfCell[2] || cellDown.typesSidesOfCell[0] == CellSideType.None)
             {
                 sides[2] = true;
-                if (cellDown.typeSideOfCell[0] == CellSideType.None)
+                if (cellDown.typesSidesOfCell[0] == CellSideType.None)
                 {
                     isSideNone[2] = true;
                 }
@@ -166,10 +166,10 @@ public class GridController : MonoBehaviour, IController
         if (pos.x - 1 >= 0)
         {
             Cell cellLeft = grid.GetCell(new Vector2Int(pos.x - 1, pos.y)).GetComponent<Cell>();
-            if (cellLeft.typeSideOfCell[1] == cell.typeSideOfCell[3] || cellLeft.typeSideOfCell[1] == CellSideType.None)
+            if (cellLeft.typesSidesOfCell[1] == classCell.typesSidesOfCell[3] || cellLeft.typesSidesOfCell[1] == CellSideType.None)
             {
                 sides[3] = true;
-                if (cellLeft.typeSideOfCell[1] == CellSideType.None)
+                if (cellLeft.typesSidesOfCell[1] == CellSideType.None)
                 {
                     isSideNone[3] = true;
                 }
@@ -197,19 +197,10 @@ public class GridController : MonoBehaviour, IController
             GameObject previewObject = Instantiate(UIcontroller.currentGameObject);
             Renderer[] rendsPasteObject = previewObject.GetComponentsInChildren<Renderer>();
             Cell cellPreview = previewObject.GetComponent<Cell>();
-            
-            // Заполнить массив сторон значениями None
-            cellPreview.typeSideOfCell = new CellSideType[4]
-            {
-                CellSideType.None,
-                CellSideType.None,
-                CellSideType.None,
-                CellSideType.None
-            };
 
             RotateTypeSideOfCell(cellPreview); // Поворачиваем для корректной проверки в IsCellAvailableForMount
             // Определяем доступность размещения (проверяем соседние ячейки и их стороны)
-            if (IsCellAvailableForMount(pos))
+            if (IsCellAvailableForMount(pos, cellPreview))
             {
                 requiredMaterial = materialAvailablePreviewMode;
                 cellPreview.isAvailableForMount = true;
@@ -220,13 +211,22 @@ public class GridController : MonoBehaviour, IController
             }
             cellPreview.isPreview = true;
 
+            // Заполнить массив сторон значениями None
+            cellPreview.typesSidesOfCell = new CellSideType[4]
+            {
+                CellSideType.None,
+                CellSideType.None,
+                CellSideType.None,
+                CellSideType.None
+            };
+
             foreach (Renderer rend in rendsPasteObject)
             {
                 rend.material = requiredMaterial;
             }
             grid.ReplaceCell(pos, previewObject);
 
-            if (currentMouseEnter != new Vector2Int(-1, -1)) //Удаляем прошлую превью
+            if (currentMouseEnter != new Vector2Int(-1, -1) && currentMouseEnter != pos) //Удаляем прошлую превью
             {
                 Cell pastClassCell = grid.GetCell(currentMouseEnter).GetComponent<Cell>();
                 if (!pastClassCell.isMounted)
@@ -256,7 +256,7 @@ public class GridController : MonoBehaviour, IController
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
     }
 
-    public void onEnterMount(Vector2Int pos)
+    public void OnEnterMount(Vector2Int pos)
     // Удаляет превью при заходе на смонтированную ячейку и обновляет currentMouseEnter
     {
         if (currentMouseEnter != new Vector2Int(-1, -1))
@@ -278,6 +278,6 @@ public class GridController : MonoBehaviour, IController
     {
         // Меняем текущую ротацию по часовой стрелке
         currentRotation = (Rotation)(((int)currentRotation + 1) % 4);
-        grid.RotateCell(currentMouseEnter);
+        OnPreview(currentMouseEnter);
     }
 }

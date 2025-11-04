@@ -277,13 +277,11 @@ MonoBehaviour:
   isClicked: 0
   isPreview: 0
   isMounted: 0
-  highlightColor: {r: 0, g: 1, b: 0, a: 1}
-  intensity: 2
-  highlightColorClicked: {r: 0, g: 1, b: 0, a: 1}
-  intensityClicked: 2
+  isAvailableForMount: 0
   uiController: {fileID: 0}
   gridController: {fileID: 0}
-  cellSideType: 01000000010000000100000001000000
+  typesSidesOfCell: 01000000010000000100000001000000
+  currentRotation: 0
 --- !u!1 &7396244256788920566
 GameObject:
   m_ObjectHideFlags: 0

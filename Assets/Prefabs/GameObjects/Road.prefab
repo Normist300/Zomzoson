@@ -68,6 +68,38 @@ PrefabInstance:
       propertyPath: 'cellSideType.Array.data[2]'
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4725113492795984353, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
+      propertyPath: 'typeSideOfCell.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725113492795984353, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
+      propertyPath: 'typeSideOfCell.Array.data[1]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725113492795984353, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
+      propertyPath: 'typeSideOfCell.Array.data[2]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725113492795984353, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
+      propertyPath: 'typeSideOfCell.Array.data[3]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725113492795984353, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
+      propertyPath: 'typesSidesOfCell.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725113492795984353, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
+      propertyPath: 'typesSidesOfCell.Array.data[1]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725113492795984353, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
+      propertyPath: 'typesSidesOfCell.Array.data[2]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725113492795984353, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
+      propertyPath: 'typesSidesOfCell.Array.data[3]'
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6590673541786021084, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
       propertyPath: m_Name
       value: Road
