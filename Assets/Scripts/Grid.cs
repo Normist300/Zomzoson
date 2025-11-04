@@ -120,8 +120,8 @@ public class Grid : MonoBehaviour
                 for (int i = 0; i < 4; i++)
                 {
                     int newIndex = (i + deltaRotation) % 4;
-                    newCellSideType = classCell.cellSideType[i];
-                    classCell.cellSideType[newIndex] = newCellSideType;
+                    newCellSideType = classCell.typeSideOfCell[i];
+                    classCell.typeSideOfCell[newIndex] = newCellSideType;
                 }
             }
             classCell.currentRotation = currentGridRotation;

@@ -21,7 +21,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public event Action<Vector2Int> eventEnterMount;
     public UIController uiController;
     public GridController gridController;
-    public GridController.CellSideType[] cellSideType = new GridController.CellSideType[4]; // 0 - вверх, 1 - право, 2 - вниз, 3 - лево
+    public GridController.CellSideType[] typeSideOfCell = new GridController.CellSideType[4]; // 0 - вверх, 1 - право, 2 - вниз, 3 - лево
     public GridController.Rotation currentRotation = GridController.Rotation.up;
 
     private Renderer[] _renderers;
