@@ -278,7 +278,11 @@ public class GridController : MonoBehaviour, IController
     {
         // Меняем текущую ротацию по часовой стрелке
         currentRotation = (Rotation)(((int)currentRotation + 1) % 4);
-        OnPreview(currentMouseEnter);
+        Cell classPastCell = grid.GetCell(currentMouseEnter).GetComponent<Cell>();
+        if (classPastCell.isPreview)
+        {
+            OnPreview(currentMouseEnter);
+        }
     }
 
     public void OnClearPreview()

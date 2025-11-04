@@ -1043,7 +1043,7 @@ MonoBehaviour:
   indentZ: 10
   cellSize: 20
   cellSpace: {fileID: 6242477276939435404, guid: 1789f863aee0ef84c847c7c936fbf605, type: 3}
-  cellFirst: {fileID: 7433177364286664093, guid: fb8c5dd89c461df4c92e1a34b8b43210, type: 3}
+  cellFirst: {fileID: 6590673541786021084, guid: 2ad7c479d07aa69489b3160841a88468, type: 3}
   gridController: {fileID: 475446651}
   currentRotation: 0
 --- !u!4 &1580767882
