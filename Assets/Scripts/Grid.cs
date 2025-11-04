@@ -23,7 +23,7 @@ public class Grid : MonoBehaviour
     // Вложенный словарь для хранения объектов сетки
     private Dictionary<int, Dictionary<int, GameObject>> gridCells = new Dictionary<int, Dictionary<int, GameObject>>();
 
-    private Vector3 objectPosition;
+    public GridController.Rotation currentRotation;
 
     void Start()
     {
@@ -31,6 +31,7 @@ public class Grid : MonoBehaviour
         eventGridReady.Invoke();
         GameObject goCellFirst = InstanForMount(cellFirst);
         ReplaceCell(new Vector2Int(3, 3), goCellFirst);
+        currentRotation = gridController.currentRotation;
     }
 
     public GameObject InstanForMount(GameObject go)
@@ -88,74 +89,6 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void AddCell (Vector2Int pos, GameObject newGoCell)
-    {
-        if (GetCell(pos) == null)
-        {
-            Vector3 objectPosition = transform.position;
-            Vector3 position = new Vector3(pos.x * cellSize + objectPosition.x + indentX, objectPosition.y,
-                                           pos.y * cellSize + objectPosition.z + indentZ);
-            if (newGoCell.scene.IsValid())
-            {
-                newGoCell.transform.position = position;
-                gridCells[pos.x][pos.y] = newGoCell;
-                Cell newGoClassCell = newGoCell.gameObject.GetComponent<Cell>();
-                newGoClassCell.Subscribe(gridController);
-                newGoClassCell.SetValues(pos);
-                newGoCell.transform.SetParent(transform);
-                Debug.Log($"Создана ячейка в ({pos}), {newGoClassCell.isPreview}");
-            }
-            else
-            {
-                GameObject goCell = Instantiate(newGoCell, position, Quaternion.identity, transform);
-                gridCells[pos.x][pos.y] = goCell;
-                Cell classCell = goCell.GetComponent<Cell>();
-                classCell.Subscribe(gridController);
-                classCell.SetValues(pos);
-                Debug.Log($"Создана ячейка в ({pos}), {classCell.isPreview}");
-            }
-            
-        }
-        else
-        {
-            Debug.Log($"Место для ячейки ({pos}) занято");
-        }
-    }
-
-    // Пример метода для удаления всех ячеек
-    public void DestroyAllCells()
-    {
-        foreach (var row in gridCells)
-        {
-            foreach (var cell in row.Value)
-            {
-                Destroy(cell.Value); // Удаление ячейки
-            }
-        }
-
-        gridCells.Clear(); // Очищаем словарь после удаления
-        Debug.Log("All cells destroyed.");
-    }
-
-    public void DestroyCell(Vector2Int pos)
-    {
-        Destroy(GetCell(pos));
-        gridCells[pos.x].Remove(pos.y);
-    }
-
-    public void ReplaceCell(Vector2Int pos, GameObject newCell)
-    {
-        if (gridCells.ContainsKey(pos.x) && gridCells[pos.x].ContainsKey(pos.y))
-        {
-            DestroyCell(pos);
-            AddCell(pos, newCell);
-        }
-        else
-        {
-            Debug.Log("Не найдена ячейка"); // Если ячейка не найдена
-        }
-    }
-
     public void RotateCell(Vector2Int pos)
     {
         GridController.Rotation currentGridRotation = gridController.currentRotation;
@@ -198,4 +131,74 @@ public class Grid : MonoBehaviour
             Debug.Log("Не найдена ячейка для поворота"); // Если ячейка не найдена
         }
     }
+
+    public void AddCell (Vector2Int pos, GameObject newGoCell)
+    {
+        if (GetCell(pos) == null)
+        {
+            Vector3 objectPosition = transform.position;
+            Vector3 position = new Vector3(pos.x * cellSize + objectPosition.x + indentX, objectPosition.y,
+                                           pos.y * cellSize + objectPosition.z + indentZ);
+            if (newGoCell.scene.IsValid())
+            {
+                newGoCell.transform.position = position;
+                gridCells[pos.x][pos.y] = newGoCell;
+                Cell newGoClassCell = newGoCell.gameObject.GetComponent<Cell>();
+                newGoClassCell.Subscribe(gridController);
+                newGoClassCell.SetValues(pos);
+                newGoCell.transform.SetParent(transform);
+                //Debug.Log($"Создана ячейка в ({pos}), {newGoClassCell.isPreview}");
+            }
+            else
+            {
+                GameObject goCell = Instantiate(newGoCell, position, Quaternion.identity, transform);
+                gridCells[pos.x][pos.y] = goCell;
+                Cell classCell = goCell.GetComponent<Cell>();
+                classCell.Subscribe(gridController);
+                classCell.SetValues(pos);
+                //Debug.Log($"Создана ячейка в ({pos}), {classCell.isPreview}");
+            }
+            RotateCell(pos);
+        }
+        else
+        {
+            Debug.LogWarning($"Место для ячейки ({pos}) занято");
+        }
+    }
+
+    // Пример метода для удаления всех ячеек
+    public void DestroyAllCells()
+    {
+        foreach (var row in gridCells)
+        {
+            foreach (var cell in row.Value)
+            {
+                Destroy(cell.Value); // Удаление ячейки
+            }
+        }
+
+        gridCells.Clear(); // Очищаем словарь после удаления
+        Debug.Log("All cells destroyed.");
+    }
+
+    public void DestroyCell(Vector2Int pos)
+    {
+        Destroy(GetCell(pos));
+        gridCells[pos.x].Remove(pos.y);
+    }
+
+    public void ReplaceCell(Vector2Int pos, GameObject newCell)
+    {
+        if (gridCells.ContainsKey(pos.x) && gridCells[pos.x].ContainsKey(pos.y))
+        {
+            DestroyCell(pos);
+            AddCell(pos, newCell);
+        }
+        else
+        {
+            Debug.Log("Не найдена ячейка"); // Если ячейка не найдена
+        }
+    }
+
+   
 }

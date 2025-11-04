@@ -41,16 +41,6 @@ public class GridController : MonoBehaviour, IController
 
     private void OnEnable()
     {
-        // Подключение ивентов со всех экземпляров
-        iSubCells = GetComponentsInChildren<Cell>()
-                               .Where(t => t.CompareTag("Cell"))
-                               .ToArray();
-
-        foreach (var cell in iSubCells)
-        {
-            cell.Subscribe(this);
-        }
-
         // Подписываем WASDGod
         wasdGod = FindFirstObjectByType<WASDGod>();
         wasdGod.Subscribe(this);
@@ -65,6 +55,7 @@ public class GridController : MonoBehaviour, IController
         }
         subscribedCells.Clear();
 
+
         // Отписываем WASDGod
         wasdGod.Unsubscribe(this);
         wasdGod = null;
@@ -72,7 +63,15 @@ public class GridController : MonoBehaviour, IController
 
     void onGridReady()
     {
-        OnEnable();
+        // Подключение ивентов со всех экземпляров
+        iSubCells = GetComponentsInChildren<Cell>()
+                               .Where(t => t.CompareTag("Cell"))
+                               .ToArray();
+
+        foreach (var cell in iSubCells)
+        {
+            cell.Subscribe(this);
+        }
     }
 
     public void OnReplaceCell(Vector2Int pos)

@@ -79,14 +79,14 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     {
         if (!isClicked)
         {
-            Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
+            //Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
             eventSelectTile?.Invoke(UIPositon, aliasGameObject);
             //building_grid?.Invoke();
             isClicked = true;
         }
         else
         {
-            Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
+            //Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
             eventDisableTile?.Invoke();
         }
     }
@@ -94,14 +94,14 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     public void OnPointerEnter(PointerEventData eventData)
     {
         var r = GetComponent<Renderer>();
-        Debug.Log($"Enter {gameObject.name} with {eventData.button}");
+        //Debug.Log($"Enter {gameObject.name} with {eventData.button}");
         SetHighlight(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         var r = GetComponent<Renderer>();
-        Debug.Log($"Exit {gameObject.name} with {eventData.button}");
+        //Debug.Log($"Exit {gameObject.name} with {eventData.button}");
         SetHighlight(false);
     }
 }

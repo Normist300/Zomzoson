@@ -13,20 +13,16 @@ public class WASDGod : MonoBehaviour, ISubscribable<GridController>
     public float minYVelocity = 0.2f;
     public float maxYVelocity = 1f;
 
-    public InputActionAsset InputActions;
-
     private InputAction rotateCell;
 
     public event Action eventRotateCell;
 
     private void OnEnable()
     {
-        InputActions.FindActionMap("UI").Enable();
     }
 
     private void OnDisable()
     {
-        InputActions.FindActionMap("UI").Disable();
     }
 
     private void Awake()
@@ -61,6 +57,7 @@ public class WASDGod : MonoBehaviour, ISubscribable<GridController>
         
         if (rotateCell.WasPerformedThisFrame())
         {
+            Debug.Log("RotateCell action performed");
             eventRotateCell.Invoke();
         }
     }

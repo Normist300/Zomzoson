@@ -15,8 +15,6 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public bool isPreview = false;
     public bool isMounted = false; // Удаляет превью при заходе на смонтированную ячейку и обновляет currentMouseEnter
     public bool isAvailableForMount = false;
-    [SerializeField] private float intensity = 2.0f;
-    [SerializeField] private float intensityClicked = 2.0f;
     public event Action<Vector2Int> eventReplaceCell;
     public event Action<Vector2Int> eventPreview;
     public event Action<Vector2Int> eventDisPreview;
@@ -77,7 +75,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log($"Exit {pos.x} {pos.y} with {eventData.button}");
+        //Debug.Log($"Exit {pos.x} {pos.y} with {eventData.button}");
     }
 
     public void Subscribe(GridController gridController)
