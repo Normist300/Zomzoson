@@ -5,7 +5,7 @@ using EasyButtons;
 using UnityEngine.Events;
 using System;
 
-public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISubscribable<UIController>//, ISubscribable<GridController>
 {
     [SerializeField] private int UIPositon = -1;
     [SerializeField] private Color highlightColor = Color.green;
@@ -103,5 +103,17 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
         var r = GetComponent<Renderer>();
         //Debug.Log($"Exit {gameObject.name} with {eventData.button}");
         SetHighlight(false);
+    }
+
+    public void Subscribe(UIController uiController)
+    {
+        eventSelectTile += uiController.OnSelectTile;
+        eventDisableTile += uiController.OnDisableTile;
+    }
+
+    public void Unsubscribe(UIController uiController)
+    {
+        eventSelectTile -= uiController.OnSelectTile;
+        eventDisableTile -= uiController.OnDisableTile;
     }
 }
