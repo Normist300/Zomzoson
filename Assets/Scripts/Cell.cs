@@ -82,7 +82,6 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     {
         eventReplaceCell += gridController.OnReplaceCell;
         eventPreview += gridController.OnPreview;
-        eventDisPreview += gridController.OnDisPreview;
         eventEnterMount += gridController.OnEnterMount;
         gridController.subscribedCells.Add(this);
     }
@@ -91,7 +90,6 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     {
         eventReplaceCell -= gridController.OnReplaceCell;
         eventPreview -= gridController.OnPreview;
-        eventDisPreview -= gridController.OnDisPreview;
         eventEnterMount -= gridController.OnEnterMount;
         gridController.subscribedCells.Remove(this);
     }

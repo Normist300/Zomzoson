@@ -231,7 +231,7 @@ public class GridController : MonoBehaviour, IController
                 Cell pastClassCell = grid.GetCell(currentMouseEnter).GetComponent<Cell>();
                 if (!pastClassCell.isMounted)
                 {
-                    OnDisPreview(currentMouseEnter);
+                    DisPreview(currentMouseEnter);
                     currentMouseEnter = pos;
                 }
                 else
@@ -247,7 +247,7 @@ public class GridController : MonoBehaviour, IController
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
     }
 
-    public void OnDisPreview(Vector2Int pos)
+    public void DisPreview(Vector2Int pos)
     {
          if (UIcontroller.currentGameObject != null)
         {
@@ -264,7 +264,7 @@ public class GridController : MonoBehaviour, IController
             Cell pastClassCell = grid.GetCell(currentMouseEnter).GetComponent<Cell>();
             if (pastClassCell.isPreview)
             {
-                OnDisPreview(currentMouseEnter);
+                DisPreview(currentMouseEnter);
                 currentMouseEnter = pos;
             }
         }
@@ -280,4 +280,18 @@ public class GridController : MonoBehaviour, IController
         currentRotation = (Rotation)(((int)currentRotation + 1) % 4);
         OnPreview(currentMouseEnter);
     }
+
+    public void OnClearPreview()
+    {
+        if (currentMouseEnter != new Vector2Int(-1, -1))
+        {
+            Cell pastClassCell = grid.GetCell(currentMouseEnter).GetComponent<Cell>();
+            if (pastClassCell.isPreview)
+            {
+                DisPreview(currentMouseEnter);
+                currentMouseEnter = new Vector2Int(-1, -1);
+            }
+        }
+    }
+
 }

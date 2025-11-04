@@ -5,7 +5,7 @@ using EasyButtons;
 using UnityEngine.Events;
 using System;
 
-public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISubscribable<UIController>//, ISubscribable<GridController>
+public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISubscribable<UIController>
 {
     [SerializeField] private int UIPositon = -1;
     [SerializeField] private Color highlightColor = Color.green;
@@ -16,6 +16,7 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     public bool isClicked = false;
     public event Action<int, GameObject> eventSelectTile;
     public event Action eventDisableTile;
+    public event Action eventClearPreview;
     public UnityEvent building_grid;
 
     private Renderer[] _renderers;
@@ -81,6 +82,7 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
         {
             //Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
             eventSelectTile?.Invoke(UIPositon, aliasGameObject);
+            eventClearPreview.Invoke();
             //building_grid?.Invoke();
             isClicked = true;
         }
@@ -109,11 +111,13 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     {
         eventSelectTile += uiController.OnSelectTile;
         eventDisableTile += uiController.OnDisableTile;
+        eventClearPreview += uiController.OnClearPreview;
     }
 
     public void Unsubscribe(UIController uiController)
     {
         eventSelectTile -= uiController.OnSelectTile;
         eventDisableTile -= uiController.OnDisableTile;
+        eventClearPreview -= uiController.OnClearPreview;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UIController : MonoBehaviour, IController
 {
@@ -69,5 +70,11 @@ public class UIController : MonoBehaviour, IController
         currentUIPosition = -1;
         currentGameObject = null;
         isSelected = false;
+    }
+
+    public UnityEvent eventClearPreview;
+    public void OnClearPreview()
+    {
+        eventClearPreview?.Invoke();
     }
 }
