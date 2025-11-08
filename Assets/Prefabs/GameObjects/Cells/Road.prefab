@@ -168,7 +168,7 @@ MonoBehaviour:
   gridController: {fileID: 0}
   typesSidesOfCell: 02000000010000000200000001000000
   currentRotation: 0
---- !u!1 &6328776762439373843
+--- !u!1 &6165689718751679806
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,12 +176,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3945454378424967168}
-  - component: {fileID: 1910074020680708092}
-  - component: {fileID: 1698337319628870041}
-  - component: {fileID: 5783153436513417555}
-  - component: {fileID: 7087537070372184289}
-  - component: {fileID: 6698991557154049848}
+  - component: {fileID: 4523160146542817586}
+  - component: {fileID: 1607924056836704440}
+  - component: {fileID: 877992229100772113}
+  - component: {fileID: 5056509034611007256}
+  - component: {fileID: 6726555230309059774}
+  - component: {fileID: 8950806112974197821}
   m_Layer: 0
   m_Name: Road(Clone)
   m_TagString: Untagged
@@ -189,28 +189,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3945454378424967168
+--- !u!4 &4523160146542817586
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6328776762439373843}
+  m_GameObject: {fileID: 6165689718751679806}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.92, y: 0, z: 1.08}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8260000032990099598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1910074020680708092
+--- !u!114 &1607924056836704440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6328776762439373843}
+  m_GameObject: {fileID: 6165689718751679806}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cddc1941501135645b2a8b35032f1fc6, type: 3}
@@ -220,41 +220,47 @@ MonoBehaviour:
   end: {fileID: 0}
   autoSetControlPoints: 0
   points:
-  - {x: -7.92, y: 0, z: -1.08}
-  - {x: -6.654726, y: 0, z: -1.0800008}
-  - {x: -4.2442985, y: 0, z: -0.31539267}
-  - {x: -2.1938796, y: 0, z: -0.3146444}
-  - {x: -0.20423897, y: 0, z: -0.3139184}
-  - {x: 1.5875218, y: 0, z: -1.08}
-  - {x: 2.08, y: 0, z: -1.08}
+  - {x: -5.66, y: 0, z: 0.069999695}
+  - {x: -5.1757503, y: 0, z: 0.069999404}
+  - {x: -4.5829678, y: 0, z: 1.3127766}
+  - {x: -2.062049, y: 0, z: 1.276494}
+  - {x: -1.0106802, y: 0, z: 1.2613622}
+  - {x: -0.08024931, y: 0, z: -1.3024851}
+  - {x: 1.2021965, y: 0, z: -1.5539808}
+  - {x: 3.1947613, y: 0, z: -1.9447355}
+  - {x: 5.44621, y: 0, z: -0.07999975}
+  - {x: 5.76, y: 0, z: -0.07999992}
   normals:
+  - {x: 0, y: 1, z: 0}
   - {x: 0, y: 1, z: 0}
   - {x: 0, y: 1, z: 0}
   - {x: 0, y: 1, z: 0}
   angles: []
   bounds:
-    m_Center: {x: -2.92, y: 0, z: -0.69732225}
-    m_Extent: {x: 5, y: 0, z: 0.3826778}
+    m_Center: {x: 0.05000019, y: 0, z: -0.1654011}
+    m_Extent: {x: 5.71, y: 0, z: 1.441895}
   boundingBoxes:
-  - m_Center: {x: -5.05694, y: 0, z: -0.69732225}
-    m_Extent: {x: 2.86306, y: 0, z: 0.3826778}
-  - m_Center: {x: -0.05693984, y: 0, z: -0.69732225}
-    m_Extent: {x: 2.1369398, y: 0, z: 0.3826778}
---- !u!33 &1698337319628870041
+  - m_Center: {x: -3.8006039, y: 0, z: 0.67324686}
+    m_Extent: {x: 1.859396, y: 0, z: 0.60324717}
+  - m_Center: {x: -0.42992616, y: 0, z: -0.1387434}
+    m_Extent: {x: 1.6321228, y: 0, z: 1.4152374}
+  - m_Center: {x: 3.4810984, y: 0, z: -0.843648}
+    m_Extent: {x: 2.278902, y: 0, z: 0.7636481}
+--- !u!33 &877992229100772113
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6328776762439373843}
+  m_GameObject: {fileID: 6165689718751679806}
   m_Mesh: {fileID: 0}
---- !u!114 &5783153436513417555
+--- !u!114 &5056509034611007256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6328776762439373843}
+  m_GameObject: {fileID: 6165689718751679806}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f529346a7379142901f04d3a39718e, type: 3}
@@ -268,13 +274,13 @@ MonoBehaviour:
     uvOffset: {x: 0, y: 1}
   autoGenerate: 1
   SourceMesh: {fileID: -5754084199372789682, guid: 4e3d4f025935bf34faa70c8b4430a849, type: 3}
---- !u!23 &7087537070372184289
+--- !u!23 &6726555230309059774
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6328776762439373843}
+  m_GameObject: {fileID: 6165689718751679806}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -316,13 +322,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6698991557154049848
+--- !u!64 &8950806112974197821
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6328776762439373843}
+  m_GameObject: {fileID: 6165689718751679806}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -483,7 +489,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3945454378424967168}
+  - {fileID: 4523160146542817586}
   m_Father: {fileID: 299015284273950391}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7250275400572397626
@@ -500,7 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Barmetler.RoadSystem.Runtime::Barmetler.RoadSystem.RoadSystem
   intersections: []
   roads:
-  - {fileID: 1910074020680708092}
+  - {fileID: 1607924056836704440}
   graph:
     roadSystem: {fileID: 7250275400572397626}
     nodes: []

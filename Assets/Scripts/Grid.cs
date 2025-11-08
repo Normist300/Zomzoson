@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using Barmetler.RoadSystem;
+
 
 public class Grid : MonoBehaviour
 {
@@ -119,6 +120,20 @@ public class Grid : MonoBehaviour
         }
     }
 
+    public void GenerateMeshAtCell(Vector2Int pos)
+    {
+        GameObject cell = GetCell(pos);
+        if (cell != null)
+        {
+            // Берём все компоненты RoadMeshGenerator на ячейке и генерируем меш
+            RoadMeshGenerator[] roadMeshGenerators = cell.GetComponentsInChildren<RoadMeshGenerator>();
+            foreach (var roadMeshGenerator in roadMeshGenerators)
+            {
+                roadMeshGenerator.GenerateRoadMesh();
+            }
+        }
+    }
+
     public void AddCell (Vector2Int pos, GameObject newGoCell)
     {
         if (GetCell(pos) == null)
@@ -151,6 +166,10 @@ public class Grid : MonoBehaviour
         {
             Debug.LogWarning($"Место для ячейки ({pos}) занято");
         }
+
+        // Генерируем меш дорог
+        GenerateMeshAtCell(pos);
+
     }
 
     // Пример метода для удаления всех ячеек
