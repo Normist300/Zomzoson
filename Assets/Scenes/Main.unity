@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WASDGod
   moveSpeed: 40
   scrollSpeed: 10000
-  minY: 20
+  minY: 10
   maxY: 100
   minYVelocity: 0.5
   maxYVelocity: 2
