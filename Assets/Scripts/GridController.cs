@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 
-public class GridController : MonoBehaviour, IController
+public class GridController : MonoBehaviour, IController, ISubscribable<UIController>
 {
     ISubscribable<GridController>[] iSubCells;
     ISubscribable<GridController> wasdGod;
@@ -17,6 +17,8 @@ public class GridController : MonoBehaviour, IController
 
     public Vector2Int currentMouseEnter = new Vector2Int(-1, -1);
     public Rotation currentRotation = Rotation.up;
+
+    public event Action eventAfterMount;
 
     public enum Rotation // Куда смотрит вверхняя сторона ячейки
     {
@@ -84,6 +86,7 @@ public class GridController : MonoBehaviour, IController
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
 
+        eventAfterMount.Invoke();
     }
 
     public void RotateTypeSideOfCell(Cell classCell)
@@ -296,6 +299,16 @@ public class GridController : MonoBehaviour, IController
                 currentMouseEnter = new Vector2Int(-1, -1);
             }
         }
+    }
+
+    public void Subscribe(UIController controller)
+    {
+        eventAfterMount += controller.OnAfterMount;
+    }
+
+    public void Unsubscribe(UIController controller)
+    {
+        eventAfterMount -= controller.OnAfterMount;
     }
 
 }

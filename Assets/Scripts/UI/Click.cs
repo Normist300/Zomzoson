@@ -7,7 +7,7 @@ using System;
 
 public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISubscribable<UIController>
 {
-    [SerializeField] private int UIPositon = -1;
+    [SerializeField] public int UIPositon = -1;
     [SerializeField] private Color highlightColor = Color.green;
     [SerializeField] private float intensity = 2.0f;
     [SerializeField] private Color highlightColorClicked = Color.green;

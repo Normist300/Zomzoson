@@ -7,8 +7,6 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISubscribable<GridController>
 {
-    public int xPos;
-    public int yPos;
     public Vector2Int pos;
     public bool isEmptyCell = false;
     public bool isClicked = false;
