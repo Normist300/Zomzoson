@@ -8,8 +8,8 @@ public class Grid : MonoBehaviour
 {
     public event Action eventGridReady;
     // Размер сетки
-    public int width = 10;
-    public int height = 10;
+    public int width = 21;
+    public int height = 21;
     public int indentX = 10;
     public int indentZ = 10;
 
@@ -31,7 +31,7 @@ public class Grid : MonoBehaviour
         GenerateGrid();
         eventGridReady.Invoke();
         GameObject goCellFirst = InstanForMount(cellFirst);
-        ReplaceCell(new Vector2Int(3, 3), goCellFirst);
+        ReplaceCell(new Vector2Int(11, 11), goCellFirst);
         currentRotation = gridController.currentRotation;
     }
 
