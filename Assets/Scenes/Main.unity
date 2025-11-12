@@ -786,7 +786,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   currentGameObject: {fileID: 0}
+  mainCamera: {fileID: 330585543}
   isSelected: 0
+  gridController: {fileID: 475446651}
+  SpawnPositionUiCell: {x: 0, y: -3, z: 10}
+  uiRoad: {fileID: 6935631578501579636, guid: 22d4d78eb911ad8499bb3048b918d67e, type: 3}
+  uiTurnRoad: {fileID: 291780884391259265, guid: 71e772e1f9764f243b7c7c400b6492a9, type: 3}
+  uiCrossroad: {fileID: 5078381923024094677, guid: f790cea0505fbf546bcf452809fde44e, type: 3}
   eventClearPreview:
     m_PersistentCalls:
       m_Calls:
@@ -874,6 +880,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Road
       objectReference: {fileID: 0}
+    - target: {fileID: 6935631578501579636, guid: 22d4d78eb911ad8499bb3048b918d67e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1993605044403043319, guid: a330f8c91cfe5bf43a0c5b6ed6d6b1a3, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -938,7 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WASDGod
   moveSpeed: 40
   scrollSpeed: 10000
-  minY: 3
+  minY: 7
   maxY: 100
   minYVelocity: 0.5
   maxYVelocity: 2
@@ -1330,6 +1340,10 @@ PrefabInstance:
       value: UI_Crossroad
       objectReference: {fileID: 0}
     - target: {fileID: 5078381923024094677, guid: f790cea0505fbf546bcf452809fde44e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078381923024094677, guid: f790cea0505fbf546bcf452809fde44e, type: 3}
       propertyPath: m_TagString
       value: UITile
       objectReference: {fileID: 0}
@@ -1460,6 +1474,10 @@ PrefabInstance:
     - target: {fileID: 5078381923024094677, guid: f790cea0505fbf546bcf452809fde44e, type: 3}
       propertyPath: m_Name
       value: UI_Turn_Road
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078381923024094677, guid: f790cea0505fbf546bcf452809fde44e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5330992735425421843, guid: f790cea0505fbf546bcf452809fde44e, type: 3}
       propertyPath: m_LocalScale.x

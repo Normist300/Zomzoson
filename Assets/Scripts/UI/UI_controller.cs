@@ -10,12 +10,13 @@ public class UIController : MonoBehaviour, IController
     private List<Click> subscribedClicks = new();
     int currentUIPosition = -1;
     public GameObject currentGameObject;
+    public GameObject mainCamera;
     public bool isSelected;
     public GridController gridController;
     public Dictionary<int, GameObject> uiTiles = new();
     public Dictionary<GameObject, int> numberOfCells = new();
+    [NonSerialized] public Dictionary<int, Click> tiles = new();
     public Vector3 SpawnPositionUiCell;
-    Click[] tiles;
 
 
     public GameObject uiRoad;
@@ -27,8 +28,6 @@ public class UIController : MonoBehaviour, IController
         numberOfCells[uiRoad] = 5;
         numberOfCells[uiTurnRoad] = 4;
         numberOfCells[uiCrossroad] = 2;
-
-        SpawnRandomUICell(false);
     }
 
     private void OnEnable()
@@ -36,22 +35,26 @@ public class UIController : MonoBehaviour, IController
         GameObject[] goTiles;
         // Заполнение словаря uiTiles
         goTiles = GameObject.FindGameObjectsWithTag("UITile");
-        foreach (var goTile in goTiles)
+        if (goTiles.Length != 0)
         {
-            uiTiles[goTile.GetComponent<Click>().UIPositon] = goTile;
+            foreach (var goTile in goTiles)
+            {
+                uiTiles[goTile.GetComponent<Click>().UIPositon] = goTile;
+            }
         }
 
         // Подключение ивентов со всех экземпляров
-        tiles = GetComponentsInChildren<Click>()
+        Click[] tilesArray = GetComponentsInChildren<Click>()
                                .Where(t => t.CompareTag("UITile"))
                                .ToArray();
 
-        foreach (var tile in tiles)
+        foreach (var tile in tilesArray)
         {
             tile.Subscribe(this);
             subscribedClicks.Add(tile);
-
+            tiles[tile.UIPositon] = tile; // Заполняем словарь tiles
         }
+        
 
         gridController.Subscribe(this);
     }
@@ -71,6 +74,14 @@ public class UIController : MonoBehaviour, IController
     void Start()
     {
         isSelected = false;
+        // Находим Main Camera
+        mainCamera = GameObject.Find("Main Camera");
+        if (mainCamera == null)
+        {
+            Debug.LogError("Main Camera не найдена!");
+            return;
+        }
+        SpawnRandomUICell(false);
     }
 
     void Update()
@@ -137,18 +148,21 @@ public class UIController : MonoBehaviour, IController
 
     public void SpawnRandomUICell(bool Selected = true)
     {
-        GameObject randomUiCell = GetRandomUICellPrefab();
-        randomUiCell = Instantiate(randomUiCell, transform);
+        GameObject _randomUiCellPrefab = GetRandomUICellPrefab();
+        GameObject randomUiCell = Instantiate(_randomUiCellPrefab, transform);
+        randomUiCell.transform.SetParent(mainCamera.transform);
         randomUiCell.transform.localPosition = SpawnPositionUiCell;
+        randomUiCell.transform.rotation = Quaternion.Euler(0, 0, 0);
+        uiTiles[1] = randomUiCell; // Пока что позиция 1
+
         Click classUiCell = randomUiCell.GetComponent<Click>();
         classUiCell.Subscribe(this);
-        classUiCell.UIPositon = 1;
+        classUiCell.UIPositon = 0;
+        tiles[classUiCell.UIPositon] = classUiCell; // Обновляем словрь tiles
         if (Selected)
         {
             classUiCell.OnPointerClick(null);
         }
-
-        uiTiles[1] = randomUiCell; // Пока что позиция 1
     }
 
     public void OnAfterMount()
