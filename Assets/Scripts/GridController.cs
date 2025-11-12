@@ -253,10 +253,10 @@ public class GridController : MonoBehaviour, IController, ISubscribable<UIContro
     public void DisPreview(Vector2Int pos)
     {
          if (UIcontroller.currentGameObject != null)
-        {
-            grid.ReplaceCell(pos, grid.cellSpace);
-        }
-        else Debug.LogWarning("UIcontroller.currentGameObject == null");
+            {
+                grid.ReplaceCell(pos, grid.cellSpace);
+            }
+            else Debug.LogWarning("UIcontroller.currentGameObject == null");
     }
 
     public void OnEnterMount(Vector2Int pos)

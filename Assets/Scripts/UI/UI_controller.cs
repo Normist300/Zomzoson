@@ -23,16 +23,19 @@ public class UIController : MonoBehaviour, IController
     public GameObject uiRoad;
     public GameObject uiTurnRoad;
     public GameObject uiCrossroad;
+    public GameObject uiMonastery;
 
     public int numberUIRoad = 5;
     public int numberUITurnRoad = 4;
     public int numberUICrossroad = 2;
+    public int numberUIMonastery = 2;
 
     private void Awake()
     {
         numberOfCells[uiRoad] = numberUIRoad;
         numberOfCells[uiTurnRoad] = numberUITurnRoad;
         numberOfCells[uiCrossroad] = numberUICrossroad;
+        numberOfCells[uiMonastery] = numberUIMonastery;
 
         totalNumberOfUICells = 0;
         foreach (var kvp in numberOfCells)

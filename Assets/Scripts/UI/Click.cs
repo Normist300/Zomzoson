@@ -8,10 +8,10 @@ using System;
 public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISubscribable<UIController>
 {
     [SerializeField] public int UIPositon = -1;
-    [SerializeField] private Color highlightColor = Color.green;
-    [SerializeField] private float intensity = 2.0f;
-    [SerializeField] private Color highlightColorClicked = Color.green;
-    [SerializeField] private float intensityClicked = 2.0f;
+    [SerializeField] private Color highlightColor = new Color(0, 1, 0.9764706f, 1);
+    [SerializeField] private float intensity = 0.15f;
+    [SerializeField] private Color highlightColorClicked = new Color(0, 1, 0.9764706f, 1);
+    [SerializeField] private float intensityClicked = 0.25f;
     [SerializeField] public GameObject aliasGameObject;
     public bool isClicked = false;
     public event Action<int, GameObject> eventSelectTile;
@@ -89,6 +89,7 @@ public class Click : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
         else
         {
             //Debug.Log($"Clicked {gameObject.name} with {eventData.button}");
+            eventClearPreview.Invoke();
             eventDisableTile?.Invoke();
         }
     }
