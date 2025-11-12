@@ -785,6 +785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a99ba00c516cc46b2c1b0f7fa87f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  currentUIPosition: -1
+  totalNumberOfUICells: -1
   currentGameObject: {fileID: 0}
   mainCamera: {fileID: 330585543}
   isSelected: 0
@@ -793,6 +795,9 @@ MonoBehaviour:
   uiRoad: {fileID: 6935631578501579636, guid: 22d4d78eb911ad8499bb3048b918d67e, type: 3}
   uiTurnRoad: {fileID: 291780884391259265, guid: 71e772e1f9764f243b7c7c400b6492a9, type: 3}
   uiCrossroad: {fileID: 5078381923024094677, guid: f790cea0505fbf546bcf452809fde44e, type: 3}
+  numberUIRoad: 1
+  numberUITurnRoad: 1
+  numberUICrossroad: 1
   eventClearPreview:
     m_PersistentCalls:
       m_Calls:

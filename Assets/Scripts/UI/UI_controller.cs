@@ -8,14 +8,15 @@ using Random = UnityEngine.Random;
 public class UIController : MonoBehaviour, IController
 {
     private List<Click> subscribedClicks = new();
-    int currentUIPosition = -1;
+    public int currentUIPosition = -1;
+    public int totalNumberOfUICells = -1;
     public GameObject currentGameObject;
     public GameObject mainCamera;
     public bool isSelected;
     public GridController gridController;
     public Dictionary<int, GameObject> uiTiles = new();
     public Dictionary<GameObject, int> numberOfCells = new();
-    [NonSerialized] public Dictionary<int, Click> tiles = new();
+    [NonSerialized] public Dictionary<int, Click> tiles = new(); // без [SerializeField] будет null после сборки
     public Vector3 SpawnPositionUiCell;
 
 
@@ -23,11 +24,21 @@ public class UIController : MonoBehaviour, IController
     public GameObject uiTurnRoad;
     public GameObject uiCrossroad;
 
+    public int numberUIRoad = 5;
+    public int numberUITurnRoad = 4;
+    public int numberUICrossroad = 2;
+
     private void Awake()
     {
-        numberOfCells[uiRoad] = 5;
-        numberOfCells[uiTurnRoad] = 4;
-        numberOfCells[uiCrossroad] = 2;
+        numberOfCells[uiRoad] = numberUIRoad;
+        numberOfCells[uiTurnRoad] = numberUITurnRoad;
+        numberOfCells[uiCrossroad] = numberUICrossroad;
+
+        totalNumberOfUICells = 0;
+        foreach (var kvp in numberOfCells)
+        {
+            totalNumberOfUICells += kvp.Value;
+        }
     }
 
     private void OnEnable()
@@ -126,12 +137,12 @@ public class UIController : MonoBehaviour, IController
         // Функция также меняет веса в numberOfCells
 
         // 1️ Считаем общее количество всех экземпляров
-        int total = 0;
-        foreach (var kvp in numberOfCells)
-            total += kvp.Value;
+        if (totalNumberOfUICells <= 0)
+            return null;
+        totalNumberOfUICells -= 1;
 
         // 2️ Выбираем случайное число от 1 до total включительно
-        int randomValue = Random.Range(1, total + 1);
+        int randomValue = Random.Range(1, totalNumberOfUICells + 1);
 
         // 3️ Проходим по словарю, уменьшая randomValue,
         // пока не попадём в диапазон конкретного объекта
@@ -139,14 +150,16 @@ public class UIController : MonoBehaviour, IController
         {
             randomValue -= kvp.Value;
             if (randomValue <= 0)
-                numberOfCells[kvp.Key] = Math.Max(1, kvp.Value - 1); // Уменьшаем вес, но не ниже 1
+            {
+                numberOfCells[kvp.Key] = Math.Max(0, kvp.Value - 1); // Уменьшаем вес, но не ниже 0
                 return kvp.Key;
+            }    
         }
         
         return null;
     }
 
-    public void SpawnRandomUICell(bool Selected = true)
+    public void SpawnRandomUICell(bool selected = true)
     {
         GameObject _randomUiCellPrefab = GetRandomUICellPrefab();
         GameObject randomUiCell = Instantiate(_randomUiCellPrefab, transform);
@@ -159,7 +172,7 @@ public class UIController : MonoBehaviour, IController
         classUiCell.Subscribe(this);
         classUiCell.UIPositon = 0;
         tiles[classUiCell.UIPositon] = classUiCell; // Обновляем словрь tiles
-        if (Selected)
+        if (selected)
         {
             classUiCell.OnPointerClick(null);
         }
@@ -169,5 +182,13 @@ public class UIController : MonoBehaviour, IController
     {
         Destroy(uiTiles[1]);
         uiTiles.Remove(1);
+        isSelected = false;
+        currentGameObject = null;
+        currentUIPosition = -1;
+
+        if (totalNumberOfUICells > 0)
+        {
+            SpawnRandomUICell(true);
+        }
     }
 }
