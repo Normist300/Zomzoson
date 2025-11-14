@@ -107,7 +107,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.03, y: 1.03, z: 1.03}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8422218683184397017}
@@ -260,35 +260,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: bounds.m_Center.x
-      value: -0.101118684
+      value: -1.8016796
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: bounds.m_Center.z
-      value: 3.5878644
+      value: 5.6988654
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: bounds.m_Extent.x
-      value: 1.7480296
+      value: 1.8024001
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: bounds.m_Extent.z
-      value: 5.4122386
+      value: 3.3012376
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: points.Array.data[0].x
-      value: -1.3671016
+      value: -2.2151022
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: points.Array.data[0].z
-      value: -1.8243742
+      value: 2.3976276
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: points.Array.data[1].x
-      value: -1.5337576
+      value: -2.3817585
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: points.Array.data[1].z
-      value: -1.3698258
+      value: 2.852177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
+      propertyPath: points.Array.data[8].x
+      value: -0.0000009004791
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: points.Array.data[8].z
@@ -300,31 +304,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: boundingBoxes.Array.data[0].m_Center.x
-      value: -1.608125
+      value: -2.909591
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: boundingBoxes.Array.data[0].m_Center.z
-      value: -0.51697695
+      value: 3.8549528
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: boundingBoxes.Array.data[0].m_Extent.x
-      value: 0.24102336
+      value: 0.69448876
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: boundingBoxes.Array.data[0].m_Extent.z
-      value: 1.3073974
+      value: 1.457325
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: boundingBoxes.Array.data[2].m_Center.x
-      value: 0.823455
+      value: -0.42667496
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: boundingBoxes.Array.data[2].m_Center.z
-      value: 6.3413544
+      value: 8.062501
       objectReference: {fileID: 0}
     - target: {fileID: 8458713367620614047, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}
       propertyPath: boundingBoxes.Array.data[2].m_Extent.x
-      value: 0.8234559
+      value: 0.42739534
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3178567416260228295, guid: 6b708ea78e723154683f22a3e02395b1, type: 3}

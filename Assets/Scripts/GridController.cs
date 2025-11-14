@@ -32,7 +32,8 @@ public class GridController : MonoBehaviour, IController, ISubscribable<UIContro
     {
         None,       // Ничего
         Road,       // Дорога
-        Nothing     // Как правило поле
+        Nothing,    // Как правило поле
+        Carcassonne // Каркасон
     }
 
     private void Start()
