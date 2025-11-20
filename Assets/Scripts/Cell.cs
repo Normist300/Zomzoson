@@ -34,12 +34,12 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     void Awake()
     {
         // Берём все Renderer в себе и детях
-        _renderers = GetComponentsInChildren<Renderer>(includeInactive: false);
-        foreach (var r in _renderers)
-        {
-            // Важно: у одного Renderer может быть несколько материалов
-            _materials.AddRange(r.materials); // инстансы материалов на каждом объекте
-        }
+        //_renderers = GetComponentsInChildren<Renderer>(includeInactive: false);
+        //foreach (var r in _renderers)
+        //{
+        //    // Важно: у одного Renderer может быть несколько материалов
+        //    _materials.AddRange(r.materials); // инстансы материалов на каждом объекте
+        //}
         uiController = FindFirstObjectByType<UIController>();
         gridController = FindFirstObjectByType<GridController>();
     }

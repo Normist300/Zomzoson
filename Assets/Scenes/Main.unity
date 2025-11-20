@@ -430,6 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   subscribedCells: []
+  subscribedSkeletons: []
   grid: {fileID: 1580767881}
   UIcontroller: {fileID: 1270351521}
   materialPreviewMode: {fileID: 2100000, guid: 665041ba32105df458595e0c46434cf3, type: 2}
@@ -703,12 +704,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e3561974a0e2c469a17dbff4a5da9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WASDGod
-  moveSpeed: 40
+  moveSpeed: 60
   scrollSpeed: 10000
   minY: 7
-  maxY: 100
+  maxY: 170
   minYVelocity: 0.5
   maxYVelocity: 2
+  currentScroll: 0
+  smoothScroll: 10
 --- !u!1 &1580767880
 GameObject:
   m_ObjectHideFlags: 0
