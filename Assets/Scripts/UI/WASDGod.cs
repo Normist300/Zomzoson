@@ -13,6 +13,9 @@ public class WASDGod : MonoBehaviour, ISubscribable<GridController>
     public float minYVelocity = 0.2f;
     public float maxYVelocity = 1f;
 
+    public float currentScroll = 0f;
+    public float smoothScroll = 10f;
+
     private InputAction rotateCell;
 
     public event Action eventRotateCell;
@@ -39,10 +42,18 @@ public class WASDGod : MonoBehaviour, ISubscribable<GridController>
         // Получаем ввод от колесика мыши для перемещения по оси Y (вверх/вниз)
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 
+        // Плавное сглаживание
+        currentScroll = Mathf.Lerp(currentScroll, scrollInput, Time.deltaTime * smoothScroll);
+
+
         // Рассчитываем движение по осям X, Y и Z
         float yVelocity = Mathf.InverseLerp(minY, maxY, transform.position.y); // Нормализуем сначала координатно
         yVelocity = Mathf.Lerp(minYVelocity, maxYVelocity, yVelocity); // А потом до нужного коэфицента
-        Vector3 movement = new Vector3(moveHorizontal * moveSpeed * yVelocity, -scrollInput * scrollSpeed,
+
+        float yMovement = -currentScroll * scrollSpeed * yVelocity;
+
+        Vector3 movement = new Vector3(moveHorizontal * moveSpeed * yVelocity,
+                                       yMovement,
                                        moveVertical * moveSpeed * yVelocity) * Time.deltaTime;
 
         // Получаем текущую позицию объекта

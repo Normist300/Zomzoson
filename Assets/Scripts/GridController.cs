@@ -9,6 +9,7 @@ public class GridController : MonoBehaviour, IController, ISubscribable<UIContro
     ISubscribable<GridController>[] iSubCells;
     ISubscribable<GridController> wasdGod;
     public List<Cell> subscribedCells = new();
+    public List<Skeletons> subscribedSkeletons = new();
 
     [SerializeField] private Grid grid;
     [SerializeField] private UIController UIcontroller;
@@ -83,6 +84,13 @@ public class GridController : MonoBehaviour, IController, ISubscribable<UIContro
             GameObject goForFunc = Instantiate(UIcontroller.currentGameObject);
             Cell goCell = goForFunc.GetComponent<Cell>();
             goCell.isMounted = true;
+
+            Skeletons skeletons = goForFunc.GetComponentInChildren<Skeletons>();
+            if (skeletons != null)
+            {
+                subscribedSkeletons.Add(skeletons);
+                skeletons.SingAndDance();
+            }
             grid.ReplaceCell(pos, goForFunc);
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
