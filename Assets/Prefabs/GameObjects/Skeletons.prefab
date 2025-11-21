@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6934295242277259601}
   - component: {fileID: 4413651716634828105}
+  - component: {fileID: 2676101709446790507}
+  - component: {fileID: 5862250664043031712}
   m_Layer: 0
   m_Name: Skeletons
   m_TagString: Untagged
@@ -27,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4514947992582625166}
   - {fileID: 4597123008075962849}
@@ -47,7 +49,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3341667500990813020}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d6db68718c0d27e4889c41ebe1925662, type: 2}
   m_CullingMode: 0
@@ -61,6 +63,115 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2676101709446790507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3341667500990813020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd92b7bcc24a8b46bd93fac8c514757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!82 &5862250664043031712
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3341667500990813020}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: d9ccdf409efa367499d133a5495850c4, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.6
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 5.17
+  MaxDistance: 29.888523
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.32680154
+      value: 1
+      inSlope: -3.061185
+      outSlope: -3.061185
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.32693148
+      outSlope: -0.32693148
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &270664422771099219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,6 +223,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 33a4ef95e23044e4a92da2030df82a87, type: 3}
       propertyPath: m_Name
       value: LuurakoOrkesteri_000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 33a4ef95e23044e4a92da2030df82a87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -175,6 +290,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LuurakoOrkesteri_000006
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0477ff4786344e84e936fd8394811d37, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -236,6 +355,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c0a8dbe7d116ee846b91f0521f8619b8, type: 3}
       propertyPath: m_Name
       value: LuurakoOrkesteri_000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c0a8dbe7d116ee846b91f0521f8619b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -365,6 +488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LuurakoOrkesteri_000005
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d9b7e38f000110840aa6bd6a4a9204b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -427,6 +554,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LuurakoOrkesteri_000007
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73265d4dff4081a49b043689c04e5aff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -488,6 +619,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: edad6e3385920974c8cc8454ebccc789, type: 3}
       propertyPath: m_Name
       value: LuurakoOrkesteri_000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: edad6e3385920974c8cc8454ebccc789, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
