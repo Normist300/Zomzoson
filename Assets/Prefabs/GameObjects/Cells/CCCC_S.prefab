@@ -246,7 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6145401380649888398}
   m_Layer: 0
-  m_Name: Wast hauses
+  m_Name: West hauses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -954,6 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cell
   pos: {x: 0, y: 0}
+  isSckeletons: 1
   isEmptyCell: 0
   isClicked: 0
   isPreview: 0

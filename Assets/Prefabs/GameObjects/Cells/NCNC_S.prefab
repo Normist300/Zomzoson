@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cell
   pos: {x: 0, y: 0}
+  isSckeletons: 1
   isEmptyCell: 0
   isClicked: 0
   isPreview: 0
