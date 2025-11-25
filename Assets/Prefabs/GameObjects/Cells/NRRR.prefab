@@ -753,30 +753,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cddc1941501135645b2a8b35032f1fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Barmetler.RoadSystem.Runtime::Barmetler.RoadSystem.Road
-  start: {fileID: 916293193459859551}
+  start: {fileID: 388927086298232834}
   end: {fileID: 0}
   autoSetControlPoints: 0
   points:
-  - {x: 0, y: 0, z: -1.6300001}
-  - {x: 0, y: 0, z: -1.2573997}
-  - {x: -0.78611755, y: 0, z: -0.0041124523}
-  - {x: -0.78611755, y: 0, z: 1.5008211}
-  - {x: -0.78611755, y: 0, z: 4.0348887}
-  - {x: 0, y: 0, z: 7.2426004}
-  - {x: 0, y: 0, z: 7.87}
+  - {x: -0.50000006, y: 0, z: -2.13}
+  - {x: -0.8726005, y: 0, z: -2.1299999}
+  - {x: -2.3219707, y: 0, z: -2.3471773}
+  - {x: -3.7861176, y: 0, z: -1.9991789}
+  - {x: -6.251507, y: 0, z: -1.4132051}
+  - {x: -9.4, y: 0, z: -2.13}
+  - {x: -10, y: 0, z: -2.13}
   normals:
   - {x: 0, y: 1, z: 0}
   - {x: 0, y: 1, z: 0}
   - {x: 0, y: 1, z: 0}
   angles: []
   bounds:
-    m_Center: {x: -0.39305878, y: 0, z: 3.12}
-    m_Extent: {x: 0.39305878, y: 0, z: 4.75}
+    m_Center: {x: -5.25, y: 0, z: -1.9816799}
+    m_Extent: {x: 4.75, y: 0, z: 0.20672226}
   boundingBoxes:
-  - m_Center: {x: -0.39305878, y: 0, z: -0.0645895}
-    m_Extent: {x: 0.39305878, y: 0, z: 1.5654106}
-  - m_Center: {x: -0.39305878, y: 0, z: 4.6854105}
-    m_Extent: {x: 0.39305878, y: 0, z: 3.1845894}
+  - m_Center: {x: -2.1430588, y: 0, z: -2.0937905}
+    m_Extent: {x: 1.6430588, y: 0, z: 0.094611645}
+  - m_Center: {x: -6.893059, y: 0, z: -1.9524789}
+    m_Extent: {x: 3.1069412, y: 0, z: 0.17752123}
 --- !u!33 &2441814589338647397
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -919,7 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a17a93314be894982a1a4a345c5be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Barmetler.RoadSystem.Runtime::Barmetler.RoadSystem.RoadAnchor
-  road: {fileID: 0}
+  road: {fileID: 62479806959059090}
   isStart: 1
 --- !u!1 &8498735790336508708
 GameObject:
@@ -965,7 +965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a17a93314be894982a1a4a345c5be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Barmetler.RoadSystem.Runtime::Barmetler.RoadSystem.RoadAnchor
-  road: {fileID: 62479806959059090}
+  road: {fileID: 0}
   isStart: 1
 --- !u!1 &8747006309043279139
 GameObject:

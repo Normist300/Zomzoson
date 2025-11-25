@@ -254,7 +254,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: CNNN
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2366821972869032432, guid: 173e6370b79052e43b242202c282db81, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

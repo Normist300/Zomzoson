@@ -258,13 +258,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: CRNR
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1197618940465155189, guid: 12c940f93b6c5664eb13c9bfb2c479aa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3588721626994075345, guid: 12c940f93b6c5664eb13c9bfb2c479aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8048294904728062132}
   m_SourcePrefab: {fileID: 100100000, guid: 12c940f93b6c5664eb13c9bfb2c479aa, type: 3}
 --- !u!4 &539322365217329666 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3296926837488341674, guid: 12c940f93b6c5664eb13c9bfb2c479aa, type: 3}
   m_PrefabInstance: {fileID: 3079626141695344808}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1977279138607425145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3588721626994075345, guid: 12c940f93b6c5664eb13c9bfb2c479aa, type: 3}
+  m_PrefabInstance: {fileID: 3079626141695344808}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8048294904728062132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977279138607425145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c62840a885eee449a30a186081f1b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GenerateRoadMesh
