@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using System;
+using UnityEngine.Audio;
 
 public class GridController : MonoBehaviour, IController, ISubscribable<UIController>
 {
@@ -20,6 +22,8 @@ public class GridController : MonoBehaviour, IController, ISubscribable<UIContro
     public Rotation currentRotation = Rotation.up;
 
     public event Action eventAfterMount;
+
+    public GameObject error;
 
     public enum Rotation // Куда смотрит вверхняя сторона ячейки
     {
@@ -40,6 +44,7 @@ public class GridController : MonoBehaviour, IController, ISubscribable<UIContro
     private void Start()
     {
         grid.eventGridReady += OnGridReady;
+        //error = GameObject.Find("Error");
     }
 
     private void OnEnable()
@@ -214,11 +219,13 @@ public class GridController : MonoBehaviour, IController, ISubscribable<UIContro
             // Определяем доступность размещения (проверяем соседние ячейки и их стороны)
             if (IsCellAvailableForMount(pos, cellPreview))
             {
-                requiredMaterial = materialAvailablePreviewMode;
+                //requiredMaterial = materialAvailablePreviewMode; // С новым ГД не показываем игроку готовность клетки
+                requiredMaterial = materialPreviewMode;
                 cellPreview.isAvailableForMount = true;
             }
             else
             {
+                cellPreview.isAvailableForMount = false;
                 requiredMaterial = materialPreviewMode;
             }
             cellPreview.isPreview = true;
@@ -257,6 +264,20 @@ public class GridController : MonoBehaviour, IController, ISubscribable<UIContro
             }
         }
         else Debug.LogWarning("UIcontroller.currentGameObject == null");
+    }
+
+    public void OnError()
+    {
+        StartCoroutine(DoAfterSound());
+
+        IEnumerator DoAfterSound()
+        {
+            error.SetActive(true);
+            AudioSource audio = error.GetComponent<AudioSource>();
+            audio.Play();
+            yield return new WaitForSeconds(audio.clip.length);  // ждём окончания звука
+            error.SetActive(false);
+        }
     }
 
     public void DisPreview(Vector2Int pos)

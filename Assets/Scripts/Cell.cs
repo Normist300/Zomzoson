@@ -18,6 +18,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public event Action<Vector2Int> eventPreview;
     public event Action<Vector2Int> eventDisPreview;
     public event Action<Vector2Int> eventEnterMount;
+    public event Action eventError; // Ивент для проверки правильности расположения выбранного объекта. Также даёт разрешение на установку тайла
     public UIController uiController;
     public GridController gridController;
     public GridController.CellSideType[] typesSidesOfCell = new GridController.CellSideType[4]; // 0 - вверх, 1 - право, 2 - вниз, 3 - лево
@@ -53,6 +54,12 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             eventReplaceCell.Invoke(pos);
         }
+
+        // Если нельзя построить клетку, то перфоманс ВКЛ
+        if (!isMounted && eventData.button == PointerEventData.InputButton.Left && !isAvailableForMount && isPreview)
+        {
+            eventError.Invoke();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -64,6 +71,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             if (!isPreview && !isMounted)
             {
                 eventPreview.Invoke(pos);
+                //eventCheck.Invoke(pos);
             }
             if (isMounted)
             {
@@ -82,6 +90,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         eventReplaceCell += gridController.OnReplaceCell;
         eventPreview += gridController.OnPreview;
         eventEnterMount += gridController.OnEnterMount;
+        eventError += gridController.OnError;
         gridController.subscribedCells.Add(this);
     }
 
@@ -90,6 +99,7 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         eventReplaceCell -= gridController.OnReplaceCell;
         eventPreview -= gridController.OnPreview;
         eventEnterMount -= gridController.OnEnterMount;
+        eventError -= gridController.OnError;
         gridController.subscribedCells.Remove(this);
     }
 }
